@@ -1,0 +1,6 @@
+This is a program to replicate the results in the biofilm_threshold_theory paper, aiming to compare the stochastic version to the
+deterministic one.
+
+We'll set K = 1000 and keep g_max at 0.083, then vary the other parameters according to the ratios mentioned in Figure 4.
+
+There is no uniform death rate in these simulations presently
