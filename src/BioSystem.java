@@ -329,7 +329,7 @@ class BioSystem {
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
 
-        String results_directory = "results/";
+        String results_directory = "~/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/results";
         String pop_filename = folderID+"-stochastic_pop_over_time.csv"; //file to save all the populations over time
         String microhab_filename = folderID+"-stochastic_microhabs_over_time.csv"; //file to save the times at which new microhabs are created
 
