@@ -41,7 +41,7 @@ public class DataBox {
             int nVals = 0;
 
             for(DataBox db : dataBoxes){
-                if(db.getTimes().size() < i){
+                if(i < db.getTimes().size()){
                     avgTime += db.getTimes().get(i);
                     nVals++;
                 }
@@ -56,7 +56,7 @@ public class DataBox {
             int nVals = 0;
 
             for(DataBox db : dataBoxes){
-                if(db.getPop_over_time().size() < i){
+                if(i < db.getPop_over_time().size()){
                     avgPopSize += db.getPop_over_time().get(i);
                     nVals++;
                 }
@@ -71,7 +71,7 @@ public class DataBox {
             int nVals = 0;
 
             for(DataBox db : dataBoxes){
-                if(db.getNew_microhab_times().size() < i){
+                if(i < db.getNew_microhab_times().size()){
                     avgNewMicrohabTime += db.getNew_microhab_times().get(i);
                     nVals++;
                 }

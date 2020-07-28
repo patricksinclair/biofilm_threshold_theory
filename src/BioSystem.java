@@ -51,7 +51,7 @@ class BioSystem {
 
         this.K = K;
 
-        this.biofilm_threshold = threshold_N_ratio*K;
+        this.biofilm_threshold = threshold_N_ratio; //the code uses a ratio for biofilm threshold already, so no need to multiply by K
         this.r_immigration = immigration_ratio*(K*max_gRate);
         this.r_migration = migration_ratio*max_gRate;
         this.r_deterioration = deterioration_ratio*max_gRate;
@@ -319,20 +319,19 @@ class BioSystem {
     }
 
 
-    static void replicateFigure4(int nCores, int nBlocks, double[] rate_ratios){
+    static void replicateFigure4(String folderID, int nCores, int nBlocks, double[] rate_ratios){
 
         int K = 1000; //carrying capacity of each microhabitat
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
-        double duration = 1.; //10 hour duration
-        int nSamples = 2; //no. of measurements taken during each run
-        double interval = duration/(double)nSamples;
+        double duration = 100.; //10 hour duration
+        int nSamples = 120; //no. of measurements taken during each run
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
 
         String results_directory = "results/";
-        String pop_filename = "stochastic_pop_over_time.csv"; //file to save all the populations over time
-        String microhab_filename = "stochastic_microhabs_over_time.csv"; //file to save the times at which new microhabs are created
+        String pop_filename = folderID+"-stochastic_pop_over_time.csv"; //file to save all the populations over time
+        String microhab_filename = folderID+"-stochastic_microhabs_over_time.csv"; //file to save the times at which new microhabs are created
 
         DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
 
@@ -365,15 +364,11 @@ class BioSystem {
         ArrayList<Double> times = new ArrayList<>(); //sample times
         ArrayList<Double> total_pop_over_time = new ArrayList<>(); //size of population over time
 
-        while(bs.time_elapsed < duration+0.02*interval){
-            System.out.println(bs.time_elapsed);
-            System.out.println(interval);
-            System.out.println(bs.getTimeElapsed()%interval);
-            System.out.println();
+        while(bs.time_elapsed < duration+0.2*interval){
 
-            if((bs.getTimeElapsed()%interval <= interval) && !alreadyRecorded){
 
-                System.out.println("SUCCESS");
+            if((bs.getTimeElapsed()%interval <= 0.1*interval) && !alreadyRecorded){
+
 
                 System.out.println("runID: "+runID+"\tt: "+bs.time_elapsed);
                 times.add(bs.time_elapsed);
@@ -389,7 +384,6 @@ class BioSystem {
         }
 
         return new DataBox(times, total_pop_over_time, bs.newMicrohabTimes);
-
     }
 
 
