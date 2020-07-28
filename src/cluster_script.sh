@@ -20,7 +20,7 @@
 #$ -M p.sinclair@ed.ac.uk
 
 # Set job runtime
-#$ -l h_rt=24:00:00               # I leave this set at 7 days (set at 24 hours for 1 day queue)
+#$ -l h_rt=168:00:00               # I leave this set at 7 days (set at 24 hours for 1 day queue)
 
 
 # load any required modules
