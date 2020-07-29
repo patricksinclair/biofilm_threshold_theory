@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bf_thresh_theory_4c1 # job name
+#$ -N bftt_4c1_solo # job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file

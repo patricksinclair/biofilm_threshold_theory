@@ -3,7 +3,7 @@ public class MultispeciesMain {
     public static void main(String[] args) {
 
         int nCores = 10; //no. of cores used to run the simulations on the cluster
-        int nReps = 20; //no. of simulations run on each core
+        int nReps = 5; //no. of simulations run on each core
 
         //ratios for the rates taken from the biofilm_threshold_theory paper
         //arrays containing the ratios in the format:
@@ -17,7 +17,7 @@ public class MultispeciesMain {
         double[] ratios4d1 = new double[]{0.7, 0.4, 0.8, 0.9};
         double[] ratios4d2 = new double[]{0.7, 0.5, 0.8, 0.9};
 
-        BioSystem.replicateFigure4("ratios4c1", nCores, nReps, ratios4c1);
+        BioSystem.replicateFigure4Solo("ratios4c1", nCores, nReps, ratios4c1);
     }
 
 

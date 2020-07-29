@@ -12,7 +12,7 @@ public class Toolbox {
         File directory = new File(directoryName);
         if(!directory.exists()) directory.mkdirs();
 
-        File file = new File(directoryName+"/"+filename+".txt");
+        File file = new File(directoryName+"/"+filename+".csv");
 
         try{
 
@@ -46,7 +46,7 @@ public class Toolbox {
         File directory = new File(directoryName);
         if(!directory.exists()) directory.mkdirs();
 
-        File file = new File(directoryName+"/"+filename+".txt");
+        File file = new File(directoryName+"/"+filename+".csv");
 
         try{
 
@@ -64,6 +64,94 @@ public class Toolbox {
                 bw.write(t + ", " + newMicrohabTimes.get(t));
                 bw.newLine();
 
+            }
+
+            bw.close();
+
+        }catch (IOException e){}
+    }
+
+    static void writePopOverTimeToFile(String directoryName, String filename, DataBox[] dataBoxes){
+
+        DataBox averagedDB = DataBox.averageDataBoxes(dataBoxes);
+
+        File directory = new File(directoryName);
+        if(!directory.exists()) directory.mkdirs();
+
+        File file = new File(directoryName+"/"+filename+".csv");
+
+        try{
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            int[] max_indices = DataBox.maxIndices(dataBoxes);
+            int pop_max = max_indices[1];
+
+            //write the headers to the file
+            bw.write("t");
+            for(DataBox db : dataBoxes){
+                bw.write(", "+db.getRunID());
+            }
+
+
+            //write the data in columns
+            for(int t = 0; t < pop_max; t++){
+
+                bw.newLine();
+                bw.write(String.format("%.2f", averagedDB.getTimes().get(t)));
+
+                for(DataBox db : dataBoxes){
+                    System.out.println(db.getRunID());
+                    System.out.println(db.getTimes());
+                    System.out.println(db.getPop_over_time());
+                    System.out.println();
+
+                    if(t < db.getPop_over_time().size()) bw.write(", "+db.getPop_over_time().get(t));
+                    else bw.write(", ");
+                }
+            }
+
+            bw.close();
+
+        }catch (IOException e){}
+    }
+
+
+    static void writeNewMicrohabTimesToFile(String directoryName, String filename, DataBox[] dataBoxes){
+
+        DataBox averagedDB = DataBox.averageDataBoxes(dataBoxes);
+
+        File directory = new File(directoryName);
+        if(!directory.exists()) directory.mkdirs();
+
+        File file = new File(directoryName+"/"+filename+".csv");
+
+        try{
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            int[] max_indices = DataBox.maxIndices(dataBoxes);
+            int mh_times_max = max_indices[2];
+
+            //write the headers to the file
+            bw.write("t");
+            for(DataBox db : dataBoxes){
+                bw.write(", "+db.getRunID());
+            }
+
+
+            //write the data in columns
+            for(int t = 0; t < mh_times_max; t++){
+
+                bw.newLine();
+                bw.write(String.valueOf(averagedDB.getTimes().get(t)));
+
+                for(DataBox db : dataBoxes){
+                    if(t < db.getNew_microhab_times().size()) bw.write(", "+db.getNew_microhab_times().get(t));
+                    else bw.write(", ");
+                }
             }
 
             bw.close();
