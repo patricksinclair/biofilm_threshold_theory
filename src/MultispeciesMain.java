@@ -12,12 +12,14 @@ public class MultispeciesMain {
         double[] ratios4c1 = new double[]{1.17, 0.7, 0.8, 0.5};
         double[] ratios4c2 = new double[]{1.17, 0.8, 0.8, 0.5};
         double[] ratios4c3 = new double[]{1.17, 0.9, 0.8, 0.5};
+        //this one is inteded to approach the lower end of the figure 4c parameter regime
+        double[] ratios4cEXTRA = new double[]{1.17, 0.51, 0.8, 0.5};
 
         //Figure 4d ratios:
         double[] ratios4d1 = new double[]{0.7, 0.4, 0.8, 0.9};
         double[] ratios4d2 = new double[]{0.7, 0.5, 0.8, 0.9};
 
-        BioSystem.replicateFigure4Solo("ratios4c1", nCores, nReps, ratios4c1);
+        BioSystem.replicateFigure4Solo("ratios4cEXTRA", nCores, nReps, ratios4cEXTRA);
     }
 
 
