@@ -19,7 +19,8 @@ public class MultispeciesMain {
         double[] ratios4d1 = new double[]{0.7, 0.4, 0.8, 0.9};
         double[] ratios4d2 = new double[]{0.7, 0.5, 0.8, 0.9};
 
-        BioSystem.replicateFigure4Solo("ratios4cEXTRA", nCores, nReps, ratios4cEXTRA);
+        //BioSystem.replicateFigure4Solo("ratios4cEXTRA", nCores, nReps, ratios4cEXTRA);
+        BioSystem.oneVeryLongSimulation("ratios4cEXTRA", 10, ratios4cEXTRA);
     }
 
 

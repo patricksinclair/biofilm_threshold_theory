@@ -324,7 +324,7 @@ class BioSystem {
         int K = 1000; //carrying capacity of each microhabitat
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
-        double duration = 100.; //10 hour duration
+        double duration = 100.; //100 hour duration
         int nSamples = 120; //no. of measurements taken during each run
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
@@ -394,7 +394,7 @@ class BioSystem {
         int K = 1000; //carrying capacity of each microhabitat
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
-        double duration = 100.; //10 hour duration
+        double duration = 100.; //100 hour duration
         int nSamples = 90; //no. of measurements taken during each run
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
@@ -413,6 +413,40 @@ class BioSystem {
                     dataBoxes[i] = replicateFigure4_subroutine(duration, nSamples, i, K, rate_ratios));
 
         }
+
+
+        Toolbox.writePopOverTimeToFile(results_directory, pop_filename, dataBoxes);
+        Toolbox.writeNewMicrohabTimesToFile(results_directory, microhab_filename, dataBoxes);
+    }
+
+
+    static void oneVeryLongSimulation(String folderID, int nCores, double[] rate_ratios){
+        //this is another investigation into the low end of the parameter regime for figure 4c.
+        //here we'll set the immigration ratio to 0.51, like in some previous simulations.
+        //However this time we'll only run a few simulations (10 or so) but for a very long time,
+        //to see if any of them manage to cross the threshold to the next microhabitat
+
+        //in order to try and highlight the stochastic effects of these simulations, this method doesn't average the runs
+        //and instead saves them all individually
+
+        int K = 1000; //carrying capacity of each microhabitat
+
+        //method to replicate figure 4 in the biofilm_threshold_theory notes
+        double duration = 10000.; //10000 hour duration
+        int nSamples = 1000; //no. of measurements taken during each run
+
+        int nRuns = nCores; //total number of simulations performed
+
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/veryLongSim_results";
+        //String results_directory = "solo_results";
+        String pop_filename = folderID+"-stochastic_pop_over_time"; //file to save all the populations over time
+        String microhab_filename = folderID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
+
+        DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
+
+        //only doing a few runs, so no need to chunk them up with a for loop
+        IntStream.range(0, nRuns).parallel().forEach(i -> dataBoxes[i] = replicateFigure4_subroutine(duration, nSamples, i, K, rate_ratios));
+
 
 
         Toolbox.writePopOverTimeToFile(results_directory, pop_filename, dataBoxes);
