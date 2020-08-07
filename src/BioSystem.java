@@ -391,7 +391,7 @@ class BioSystem {
         //in order to try and highlight the stochastic effects of these simulations, this method doesn't average the runs
         //and instead saves them all individually
 
-        int K = 1000; //carrying capacity of each microhabitat
+        int K = 10000; //carrying capacity of each microhabitat (increased to 10,000 from 1000 here)
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
         double duration = 100.; //100 hour duration
@@ -399,7 +399,7 @@ class BioSystem {
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
 
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/solo_results";
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/solo_results_bigK";
         //String results_directory = "solo_results";
         String pop_filename = folderID+"-stochastic_pop_over_time"; //file to save all the populations over time
         String microhab_filename = folderID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created

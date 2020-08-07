@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bftt_rImmig_0.6# job name
+#$ -N bftt_rImmig_0.6_bigK# job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file
