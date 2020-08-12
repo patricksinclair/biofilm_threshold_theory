@@ -432,7 +432,7 @@ class BioSystem {
         int K = 10000; //carrying capacity of each microhabitat
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
-        double duration = 1000.; //1000 hour duration
+        double duration = 10000.; //1000 hour duration
         int nSamples = 999; //no. of measurements taken during each run
 
         int nRuns = nCores; //total number of simulations performed
