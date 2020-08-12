@@ -24,7 +24,7 @@ class BioSystem {
 
     private int immigration_index;
 
-    private int K; // = 1000;
+    private int K;
     private double max_gRate = 0.083;
 
     //the values of the below rates are set depending on the ratios used in the simulations
@@ -429,7 +429,7 @@ class BioSystem {
         //in order to try and highlight the stochastic effects of these simulations, this method doesn't average the runs
         //and instead saves them all individually
 
-        int K = 10000; //carrying capacity of each microhabitat
+        int K = 1000; //carrying capacity of each microhabitat
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
         double duration = 10000.; //1000 hour duration
@@ -437,7 +437,7 @@ class BioSystem {
 
         int nRuns = nCores; //total number of simulations performed
 
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/veryLongSim_results_bigK";
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/veryLongSim_results";
         String pop_filename = folderID+"-stochastic_pop_over_time"; //file to save all the populations over time
         String microhab_filename = folderID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
 
