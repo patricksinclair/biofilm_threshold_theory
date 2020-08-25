@@ -499,7 +499,7 @@ class BioSystem {
         while(bs.time_elapsed < duration+0.2*interval){
 
 
-            if((bs.getTimeElapsed()%interval <= 0.2*interval) && !alreadyRecorded){
+            if((bs.getTimeElapsed()%interval <= 0.01*interval) && !alreadyRecorded){
 
                 System.out.println("runID: "+runID+"\tt: "+bs.time_elapsed);
                 times.add(bs.time_elapsed);
