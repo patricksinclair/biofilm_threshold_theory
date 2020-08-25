@@ -486,7 +486,7 @@ class BioSystem {
         double immigration_ratio = rate_ratios[1];
         double migration_ratio = rate_ratios[2];
         double deterioration_ratio = rate_ratios[3];
-        int nSamples = 101; //this is just used to print output now
+        int nSamples = 1001; //this is just used to print output now
 
         ArrayList<Double> times = new ArrayList<>(); //sample times
         ArrayList<Double> total_pop_over_time = new ArrayList<>(); //size of population over time
@@ -498,7 +498,7 @@ class BioSystem {
 
         while(bs.time_elapsed < duration+0.2*interval){
 
-            if((bs.getTimeElapsed()%interval <= 0.01*interval) && !alreadyRecorded){
+            if((bs.getTimeElapsed()%interval <= 0.1*interval) && !alreadyRecorded){
 
                 System.out.println("runID: "+runID+"\tt: "+bs.time_elapsed);
                 times.add(bs.time_elapsed);
