@@ -7,6 +7,58 @@ import java.util.concurrent.TimeUnit;
 
 public class Toolbox {
 
+    static void writeNewMicrohabTimesToFile_v2(String directoryName, String filename, int N, DataBox[] dataBoxes){
+        //this method is used for the stochastic lag time simulations
+        //these simulations are run for a long time to ensure that all the runs reach N microhabs so, each entry should be size N
+        //in the off chance they aren't, we can do some handling there
+        //output of this will be a csv file, each row is the times new microhabitats were added in each run
+        //first column is the run ID, subsequent columns are the times taken to reach microhabitat n
+
+        File directory = new File(directoryName);
+        if(!directory.exists()) directory.mkdirs();
+
+        File file = new File(directoryName+"/"+filename+".csv");
+
+        try{
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            int[] max_indices = DataBox.maxIndices(dataBoxes);
+            int mh_times_max = max_indices[2];
+
+            //write the headers to the file
+            bw.write("runID");
+            //time taken to reach microhabitat n
+            for(int n = 0; n < N; n++){
+                bw.write(", t_mh_"+n);
+            }
+
+
+            //write the data in rows
+            //iterate over all the runs
+            int nRuns = dataBoxes.length;
+            for(int r = 0; r < nRuns; r++){
+
+                bw.newLine();
+                String data_string = ""+dataBoxes[r].getRunID();
+
+                //iterate over the times in each databox
+                for(int i = 0; i < N; i++){
+                    //this avoids arrayoutofbounds exceptions
+                    if (i < dataBoxes[r].getNew_microhab_times().size()) data_string += ","+dataBoxes[r].getNew_microhab_times().get(i);
+                    else data_string += ",";
+                }
+
+                bw.write(data_string);
+            }
+
+            bw.close();
+
+        }catch (IOException e){}
+
+    }
+
     static void writePopOverTimeToFile(String directoryName, String filename, DataBox dataBox){
 
         File directory = new File(directoryName);

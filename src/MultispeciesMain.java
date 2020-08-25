@@ -26,7 +26,8 @@ public class MultispeciesMain {
         double[] ratios4d_rImmig_0_5 = new double[]{0.7, 0.5, 0.8, 0.9};
 
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6", nCores, nReps, ratios4c_rImmig_0_6);
-        BioSystem.oneVeryLongSimulation("ratios4c_rImmig_0_55", 10, ratios4c_rImmig_0_55);
+        //BioSystem.oneVeryLongSimulation("ratios4c_rImmig_0_55", 10, ratios4c_rImmig_0_55);
+        BioSystem.stochasticWaitingTime("ratios4c_rImmig_0_6", nCores, nReps, ratios4c_rImmig_0_6);
     }
 
 

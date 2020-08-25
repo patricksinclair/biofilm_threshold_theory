@@ -70,6 +70,29 @@ class BioSystem {
     }
 
 
+    private BioSystem(int K, int thickness_limit, double threshold_N_ratio, double immigration_ratio, double migration_ratio, double deterioration_ratio){
+        //this constructor is used for the stochastic lag time sims, allows us to explicity set the thickness limit
+        this.K = K;
+        this.thickness_limit = thickness_limit;
+        this.biofilm_threshold = threshold_N_ratio; //the code uses a ratio for biofilm threshold already, so no need to multiply by K
+        this.r_immigration = immigration_ratio*(K*max_gRate);
+        this.r_migration = migration_ratio*max_gRate;
+        this.r_deterioration = deterioration_ratio*max_gRate;
+
+        this.microhabitats = new ArrayList<>();
+        this.newMicrohabTimes = new ArrayList<>();
+
+        this.time_elapsed = 0.;
+        this.exit_time = 0.;
+        this.failure_time = 0.;
+        this.immigration_index = 0;
+
+        microhabitats.add(new Microhabitat(K, max_gRate, biofilm_threshold, r_migration));
+        microhabitats.get(0).setSurface();
+        microhabitats.get(0).addARandomBacterium_x_N(1);
+    }
+
+
     private double getDeterioration_rate(){ return r_deterioration; }
     private double getBiofilm_threshold(){ return biofilm_threshold; }
     private int getN_detachments(){ return n_detachments; }
@@ -175,9 +198,13 @@ class BioSystem {
         }
 
         //todo - use this condition for the species composition simulations (or the figure 4 stuff)
+        //todo - slightly changed the exit condition to make sure we get the correct no. of datapoints for the stochastic
+        //todo - lag time sims
+        //todo - this might actually be a better way to do things, seeing as now we won't have to do an arraylist size check each time
 //        this stops sims going onn unnecessarily too long. if the biofilm reaches the thickness limit then we record the
 //        time this happened at and move on
-        if(getSystemSize()==thickness_limit){
+        //if(getSystemSize()==thickness_limit){
+        if(immigration_index == thickness_limit){
             exit_time = time_elapsed;
             time_elapsed = 9e9; //this way the time elapsed is now way above the duration value, so the simulation will stop
         }
@@ -319,7 +346,7 @@ class BioSystem {
     }
 
 
-    static void replicateFigure4(String folderID, int nCores, int nBlocks, double[] rate_ratios){
+    static void replicateFigure4(String fileID, int nCores, int nBlocks, double[] rate_ratios){
 
         int K = 1000; //carrying capacity of each microhabitat
 
@@ -330,8 +357,8 @@ class BioSystem {
         int nRuns = nCores*nBlocks; //total number of simulations performed
 
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/results";
-        String pop_filename = folderID+"-stochastic_pop_over_time"; //file to save all the populations over time
-        String microhab_filename = folderID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
+        String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
+        String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
 
         DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
 
@@ -387,7 +414,7 @@ class BioSystem {
     }
 
 
-    static void replicateFigure4Solo(String folderID, int nCores, int nBlocks, double[] rate_ratios){
+    static void replicateFigure4Solo(String fileID, int nCores, int nBlocks, double[] rate_ratios){
         //in order to try and highlight the stochastic effects of these simulations, this method doesn't average the runs
         //and instead saves them all individually
 
@@ -401,8 +428,8 @@ class BioSystem {
 
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/solo_results_bigK";
         //String results_directory = "solo_results";
-        String pop_filename = folderID+"-stochastic_pop_over_time"; //file to save all the populations over time
-        String microhab_filename = folderID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
+        String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
+        String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
 
         DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
 
@@ -420,7 +447,78 @@ class BioSystem {
     }
 
 
-    static void oneVeryLongSimulation(String folderID, int nCores, double[] rate_ratios){
+
+    public static void stochasticWaitingTime(String fileID, int nCores, int nBlocks, double[] rate_ratios){
+        //this method is used to quantify the "stochasticity" of the paramaters
+        //we shall use the stDev of the time taken to reach microhabitat N, divided by the mean of this time as the measure of stochasticity
+        //this method won't have a fixed duration like the other ones, but will instead run until a certain no. of microhabitats
+        //cba figuring out a nicer way of doing this, so we'll just set the duration to a long time and make sure the
+        //exit condition is properly implemented in updateBiofilmSize()
+        //we'll just save all the runs and the time taken to reach each microhab to a dataframe
+        //todo - make sure the exit condition is set to 10 microhabitats
+        //do 100 reps for each parameter set
+
+        int K = 10000;
+        int thickness_limit = 10;
+        double duration = 1e6; //very long duration, this is only to make sure that we don't miss any datapoints
+
+        int nRuns = nCores*nBlocks; //total number of simulations performed
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/stochastic_lagTime_bigK";
+        String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
+        String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
+
+        DataBox[] dataBoxes = new DataBox[nRuns];
+
+        for(int j = 0; j < nBlocks; j++){
+            System.out.println("section: "+j);
+
+            IntStream.range(j*nCores, (j+1)*nCores).parallel().forEach(i ->
+                    dataBoxes[i] = stochasticWaitingTime_subroutine(duration, i, K, thickness_limit, rate_ratios));
+
+        }
+
+        Toolbox.writeNewMicrohabTimesToFile_v2(results_directory, microhab_filename, thickness_limit, dataBoxes);
+        Toolbox.writePopOverTimeToFile(results_directory, pop_filename, dataBoxes);
+    }
+
+    private static DataBox stochasticWaitingTime_subroutine(double duration, int runID, int K, int thickness_limit, double[] rate_ratios){
+        double threshold_N_ratio = rate_ratios[0];
+        double immigration_ratio = rate_ratios[1];
+        double migration_ratio = rate_ratios[2];
+        double deterioration_ratio = rate_ratios[3];
+        int nSamples = 101; //this is just used to print output now
+
+        ArrayList<Double> times = new ArrayList<>(); //sample times
+        ArrayList<Double> total_pop_over_time = new ArrayList<>(); //size of population over time
+
+        double interval = duration/(double)nSamples;
+        boolean alreadyRecorded = false;
+
+        BioSystem bs = new BioSystem(K, thickness_limit, threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio);
+
+        while(bs.time_elapsed < duration+0.2*interval){
+
+            if((bs.getTimeElapsed()%interval <= 0.01*interval) && !alreadyRecorded){
+
+                System.out.println("runID: "+runID+"\tt: "+bs.time_elapsed);
+                times.add(bs.time_elapsed);
+                total_pop_over_time.add((double)bs.getTotalN());
+
+                alreadyRecorded = true;
+            }
+            if(bs.getTimeElapsed()%interval >= 0.1*interval) alreadyRecorded = false;
+
+            bs.performAction();
+        }
+
+        return new DataBox(runID, times, total_pop_over_time, bs.newMicrohabTimes);
+    }
+
+
+
+
+
+    static void oneVeryLongSimulation(String fileID, int nCores, double[] rate_ratios){
         //this is another investigation into the low end of the parameter regime for figure 4c.
         //here we'll set the immigration ratio to 0.51, like in some previous simulations.
         //However this time we'll only run a few simulations (10 or so) but for a very long time,
@@ -432,14 +530,15 @@ class BioSystem {
         int K = 1000; //carrying capacity of each microhabitat
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
-        double duration = 10000.; //1000 hour duration
+        double duration = 10000.; //10000 hour duration
         int nSamples = 999; //no. of measurements taken during each run
+
 
         int nRuns = nCores; //total number of simulations performed
 
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/veryLongSim_results";
-        String pop_filename = folderID+"-stochastic_pop_over_time"; //file to save all the populations over time
-        String microhab_filename = folderID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
+        String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
+        String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
 
         DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
 
@@ -451,6 +550,9 @@ class BioSystem {
         Toolbox.writePopOverTimeToFile(results_directory, pop_filename, dataBoxes);
         Toolbox.writeNewMicrohabTimesToFile(results_directory, microhab_filename, dataBoxes);
     }
+
+
+
 
 
 //    private static DataBox getEventCountersAndRunPops_Subroutine(double duration, int nSamples, int runID, double scale, double sigma){

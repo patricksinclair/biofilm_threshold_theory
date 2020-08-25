@@ -22,6 +22,7 @@ public class DataBox {
         this.new_microhab_times = new_microhab_times;
     }
 
+
     public int getRunID(){return runID;}
     public ArrayList<Double> getTimes(){return times;}
     public ArrayList<Double> getPop_over_time(){return pop_over_time;}
