@@ -155,10 +155,10 @@ public class Toolbox {
                 bw.write(String.format("%.2f", averagedDB.getTimes().get(t)));
 
                 for(DataBox db : dataBoxes){
-                    System.out.println(db.getRunID());
-                    System.out.println(db.getTimes());
-                    System.out.println(db.getPop_over_time());
-                    System.out.println();
+//                    System.out.println(db.getRunID());
+//                    System.out.println(db.getTimes());
+//                    System.out.println(db.getPop_over_time());
+//                    System.out.println();
 
                     if(t < db.getPop_over_time().size()) bw.write(", "+db.getPop_over_time().get(t));
                     else bw.write(", ");

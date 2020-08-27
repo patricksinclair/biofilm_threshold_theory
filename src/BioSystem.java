@@ -460,7 +460,7 @@ class BioSystem {
 
         int K = 10000;
         int thickness_limit = 10;
-        double duration = 1e4; //very long duration, this is only to make sure that we don't miss any datapoints
+        double duration = 1e5; //very long duration, this is only to make sure that we don't miss any datapoints
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/stochastic_lagTime_bigK";
@@ -486,7 +486,7 @@ class BioSystem {
         double immigration_ratio = rate_ratios[1];
         double migration_ratio = rate_ratios[2];
         double deterioration_ratio = rate_ratios[3];
-        int nSamples = 256; //this is just used to print output now
+        int nSamples = 999; //this is just used to print output now
 
         ArrayList<Double> times = new ArrayList<>(); //sample times
         ArrayList<Double> total_pop_over_time = new ArrayList<>(); //size of population over time
