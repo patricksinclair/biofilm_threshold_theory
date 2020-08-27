@@ -458,12 +458,13 @@ class BioSystem {
         //todo - make sure the exit condition is set to 10 microhabitats
         //do 100 reps for each parameter set
 
-        int K = 10000;
         int thickness_limit = 10;
-        double duration = 1e5; //very long duration, this is only to make sure that we don't miss any datapoints
+        int K = 1000;
+        double duration = 1e4; //very long duration, this is only to make sure that we don't miss any datapoints
+        int nSamples = 256; //this is just used to print output now
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/stochastic_lagTime_bigK";
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/stochastic_lagTime";
         String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
         String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
 
@@ -473,7 +474,7 @@ class BioSystem {
             System.out.println("section: "+j);
 
             IntStream.range(j*nCores, (j+1)*nCores).parallel().forEach(i ->
-                    dataBoxes[i] = stochasticWaitingTime_subroutine(duration, i, K, thickness_limit, rate_ratios));
+                    dataBoxes[i] = stochasticWaitingTime_subroutine(duration, nSamples, i, K, thickness_limit, rate_ratios));
 
         }
 
@@ -481,12 +482,12 @@ class BioSystem {
         Toolbox.writePopOverTimeToFile(results_directory, pop_filename, dataBoxes);
     }
 
-    private static DataBox stochasticWaitingTime_subroutine(double duration, int runID, int K, int thickness_limit, double[] rate_ratios){
+    private static DataBox stochasticWaitingTime_subroutine(double duration, int nSamples, int runID, int K, int thickness_limit, double[] rate_ratios){
         double threshold_N_ratio = rate_ratios[0];
         double immigration_ratio = rate_ratios[1];
         double migration_ratio = rate_ratios[2];
         double deterioration_ratio = rate_ratios[3];
-        int nSamples = 999; //this is just used to print output now
+
 
         ArrayList<Double> times = new ArrayList<>(); //sample times
         ArrayList<Double> total_pop_over_time = new ArrayList<>(); //size of population over time
