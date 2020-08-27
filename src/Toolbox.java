@@ -46,7 +46,8 @@ public class Toolbox {
                 //iterate over the times in each databox
                 for(int i = 0; i < N; i++){
                     //this avoids arrayoutofbounds exceptions
-                    if (i < dataBoxes[r].getNew_microhab_times().size()) data_string += String.format("%.3f,", dataBoxes[r].getNew_microhab_times().get(i));
+                    if (i < dataBoxes[r].getNew_microhab_times().size()) data_string += String.format("%.3f," +
+                            "", dataBoxes[r].getNew_microhab_times().get(i));
                     else data_string += ",";
                 }
 

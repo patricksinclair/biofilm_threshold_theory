@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bftt_rImmig_0.55_lagTime# job name
+#$ -N bftt_rImmig_0.55_lagTime_bigK# job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file

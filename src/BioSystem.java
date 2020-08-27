@@ -458,12 +458,12 @@ class BioSystem {
         //todo - make sure the exit condition is set to 10 microhabitats
         //do 100 reps for each parameter set
 
-        int K = 1000;
+        int K = 10000;
         int thickness_limit = 10;
         double duration = 1e4; //very long duration, this is only to make sure that we don't miss any datapoints
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/stochastic_lagTime";
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/stochastic_lagTime_bigK";
         String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
         String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
 
