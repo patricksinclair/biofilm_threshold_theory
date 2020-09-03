@@ -240,7 +240,7 @@ public class Toolbox {
             //only 3 entries so can just do it manually
             for(DataBox db : dataBoxes){
                 bw.newLine();
-                String output = String.format("%.3f,%.3f,%.3f", db.getBiofilm_threshold(), db.getR_det_ratio(), db.getTime_n1());
+                String output = String.format("%.3f,%.3f,%.3f,%.3f", db.getBiofilm_threshold(), db.getR_det_ratio(), db.getTime_n1(), db.getTime_elapsed());
                 bw.write(output);
             }
 

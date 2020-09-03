@@ -10,7 +10,7 @@ public class DataBox {
 
     private double biofilm_threshold;
     private double r_det_ratio;
-    private double time_n1;
+    private double time_n1, time_elapsed;
     private double time_n1_mean, time_n1_stDev;
 
     public DataBox(ArrayList<Double> times, ArrayList<Double> pop_over_time, ArrayList<Double> new_microhab_times){
@@ -28,21 +28,15 @@ public class DataBox {
     }
 
 
-    public DataBox(double biofilm_threshold, double r_det_ratio, double time_n1){
+    public DataBox(double biofilm_threshold, double r_det_ratio, double time_n1, double time_elapsed){
         this.biofilm_threshold = biofilm_threshold;
         this.r_det_ratio = r_det_ratio;
         this.time_n1 = time_n1;
+        this.time_elapsed = time_elapsed;
     }
 
 
-    public DataBox(double biofilm_threshold, double r_det_ratio, double time_n1_mean, double time_n1_stDev){
-        //this constructor is used for the phase diagram of the time to the first microhab as function of N* and r_det
-        //(used for the result of the average of several runs)
-        this.biofilm_threshold = biofilm_threshold;
-        this.r_det_ratio = r_det_ratio;
-        this.time_n1_mean = time_n1_mean;
-        this.time_n1_stDev = time_n1_stDev;
-    }
+
 
 
     public int getRunID(){return runID;}
@@ -52,6 +46,7 @@ public class DataBox {
     public double getBiofilm_threshold(){return biofilm_threshold;}
     public double getR_det_ratio(){return r_det_ratio;}
     public double getTime_n1(){return time_n1;}
+    public double getTime_elapsed(){return time_elapsed;}
 
     public static int[] maxIndices(DataBox[] dataBoxes){
 

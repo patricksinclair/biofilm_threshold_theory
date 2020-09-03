@@ -531,7 +531,7 @@ class BioSystem {
         //save all the values for each of the runs in seperate dataframes, then do averaging etc later manually
         //todo - make sure the failure limit thing is set up correctly
 
-        String[] headers = new String[]{"n_thresh", "det_ratio", "time_to_n"};
+        String[] headers = new String[]{"n_thresh", "det_ratio", "time_to_n", "time_elapsed"};
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/"+params[0];
 
         double duration = 1000.;
@@ -593,7 +593,7 @@ class BioSystem {
         }
 
 
-        return new DataBox(n_thresh, det_ratio, bs.exit_time);
+        return new DataBox(n_thresh, det_ratio, bs.exit_time, bs.time_elapsed);
     }
 
 
