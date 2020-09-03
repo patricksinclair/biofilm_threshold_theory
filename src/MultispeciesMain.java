@@ -4,7 +4,7 @@ public class MultispeciesMain {
 
     public static void main(String[] args) {
 
-        int nCores = 10; //no. of cores used to run the simulations on the cluster
+        int nCores = Integer.parseInt(args[0]); //no. of cores used to run the simulations on the cluster
         int nReps = 10; //no. of simulations run on each core
 
         //ratios for the rates taken from the biofilm_threshold_theory paper

@@ -41,6 +41,6 @@ time {
 # put the usual mpirun command here
 # the shell variable $NSLOTS is the number of cores you asked for above
 
-java -cp ".:java_jars/*" MultispeciesMain > bftt_log.out
+java -cp ".:java_jars/*" MultispeciesMain $NSLOTS > bftt_log.out
 
 }
