@@ -236,7 +236,9 @@ class BioSystem {
         whileloop:
         while(true) {
             poiss_immigration = new PoissonDistribution(r_immigration*tau_step);
-            poiss_deterioration = new PoissonDistribution(r_deterioration*tau_step);
+            //todo - need to handle deterioration rate being 0 in the phase diagram runs
+            if(Math.abs(r_deterioration - 0) < 1e-7) poiss_deterioration = new PoissonDistribution(1000);
+            else poiss_deterioration = new PoissonDistribution(r_deterioration*tau_step);
             poiss_migration = new PoissonDistribution(r_migration*tau_step);
             poiss_migration_edge = new PoissonDistribution(0.5*r_migration*tau_step);
 
@@ -288,7 +290,10 @@ class BioSystem {
                         //Now do detachments
                         //detaching bacteria can't migrate
                         if(mh_index == immigration_index){
-                            detachment_allocations[bac_index] = poiss_deterioration.sample();
+
+                            //todo - special case for the phase diagram code where r_det is 0
+                            if(Math.abs(r_deterioration - 0) < 1e-7) detachment_allocations[bac_index] = 0;
+                            else detachment_allocations[bac_index] = poiss_deterioration.sample();
                             //check for double events
                             if(detachment_allocations[bac_index] > 1) {
                                 //tau_halves_counter++;
