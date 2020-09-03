@@ -212,6 +212,45 @@ public class Toolbox {
     }
 
 
+    static void writeTimeToNthMicrohabDataToFile(String directoryName, String fileName, String[] headers, DataBox[]dataBoxes){
+        //writes all the runs of a parameter pair to a csv file.  These csv files can be combined later.
+
+        File directory = new File(directoryName);
+        if(!directory.exists()) directory.mkdirs();
+
+        File file = new File(directoryName+"/"+fileName+".csv");
+
+        try{
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            //write the headers to the file
+            //removed the whitespace stuff so it's simpler to read into
+            //a pandas dataframe
+            String file_header = "";
+            for(int i = 0; i < headers.length-1; i++){
+                file_header += headers[i]+",";
+            }
+            file_header += headers[headers.length-1];
+            bw.write(file_header);
+
+
+            //now write all the data from the seperate runs to the file
+            //only 3 entries so can just do it manually
+            for(DataBox db : dataBoxes){
+                bw.newLine();
+                String output = String.format("%.3f,%.3f,%.3f", db.getBiofilm_threshold(), db.getR_det_ratio(), db.getTime_n1());
+                bw.write(output);
+            }
+
+
+            bw.close();
+        }catch (IOException e){}
+
+    }
+
+
 
 
 

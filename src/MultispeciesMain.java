@@ -1,3 +1,5 @@
+import javax.print.attribute.standard.NumberOfInterveningJobs;
+
 public class MultispeciesMain {
 
     public static void main(String[] args) {
@@ -25,11 +27,14 @@ public class MultispeciesMain {
         double[] ratios4d_rImmig_0_4 = new double[]{0.7, 0.4, 0.8, 0.9};
         double[] ratios4d_rImmig_0_5 = new double[]{0.7, 0.5, 0.8, 0.9};
 
+        //Time to nth microhab params
+        int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
+        //values are results directory name, immigration ratio, migration ratio, K
+        Object[] phase_diag_params = new Object[]{"timeTo1Microhab_phaseDiagram_bigK", 0.8, 0.8, 10000};
+
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6", nCores, nReps, ratios4c_rImmig_0_6);
         //BioSystem.oneVeryLongSimulation("ratios4c_rImmig_0_55", 10, ratios4c_rImmig_0_55);
-        BioSystem.stochasticWaitingTime("ratios4c_rImmig_0_55", nCores, nReps, ratios4c_rImmig_0_55);
+        //BioSystem.stochasticWaitingTime("ratios4c_rImmig_0_55", nCores, nReps, ratios4c_rImmig_0_55);
+        BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
     }
-
-
-
 }
