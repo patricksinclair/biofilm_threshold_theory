@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bftt_1_microhab_phaseDiagram# job name
+#$ -N bftt_stochasticLagTime_0.55 # job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file

@@ -465,12 +465,12 @@ class BioSystem {
         //do 100 reps for each parameter set
 
         int thickness_limit = 10;
-        int K = 1000;
+        int K = 10000;
         double duration = 1e4; //very long duration, this is only to make sure that we don't miss any datapoints
         int nSamples = 256; //this is just used to print output now
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/stochastic_lagTime";
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/stochastic_lagTime_bigK";
         String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
         String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
 
@@ -583,7 +583,7 @@ class BioSystem {
             //got rid of the alreadyRecorded stuff as it doesn't really matter here
             if((bs.getTimeElapsed()%interval >= 0. && bs.getTimeElapsed()%interval <= 0.1*interval)){
 
-                System.out.println("rep : "+i+"\ttau: "+bs.tau+"\tK*: "+bs.biofilm_threshold+"\td_rate: "+bs.r_deterioration+"\tt: "+bs.getTimeElapsed()+"\tpop size: "+bs.getTotalN()+"\tbf_edge: "+bs.getBiofilmEdge()+"\tsystem size: "+bs.getSystemSize()+"\tc_max: "+bs.c_max);
+                System.out.println("rep : "+i+"\ttau: "+bs.tau+"\tN*: "+bs.biofilm_threshold+"\td_rate: "+bs.r_deterioration+"\tt: "+bs.getTimeElapsed()+"\tpop size: "+bs.getTotalN()+"\tbf_edge: "+bs.getBiofilmEdge()+"\tsystem size: "+bs.getSystemSize()+"\tc_max: "+bs.c_max);
                 //alreadyRecorded = true;
             }
 
