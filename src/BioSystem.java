@@ -465,7 +465,7 @@ class BioSystem {
         //do 100 reps for each parameter set
 
         int thickness_limit = 10;
-        int K = 10000;
+        int K = 1000;
         double duration = 1e4; //very long duration, this is only to make sure that we don't miss any datapoints
         int nSamples = 256; //this is just used to print output now
 

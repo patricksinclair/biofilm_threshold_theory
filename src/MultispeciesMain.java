@@ -15,8 +15,11 @@ public class MultispeciesMain {
         double[] ratios4c_rImmig_0_51 = new double[]{1.17, 0.51, 0.8, 0.5};
         //do some intermediate values between 0.51 and 0.7
         double[] ratios4c_rImmig_0_55 = new double[]{1.17, 0.55, 0.8, 0.5};
+        double[] ratios4c_rImmig_0_575 = new double[]{1.17, 0.575, 0.8, 0.5};
         double[] ratios4c_rImmig_0_6 = new double[]{1.17, 0.6, 0.8, 0.5};
+        double[] ratios4c_rImmig_0_625 = new double[]{1.17, 0.625, 0.8, 0.5};
         double[] ratios4c_rImmig_0_65 = new double[]{1.17, 0.65, 0.8, 0.5};
+        double[] ratios4c_rImmig_0_675 = new double[]{1.17, 0.675, 0.8, 0.5};
         //these are the ones from the biofilm_threshold_theory fig 4c
         double[] ratios4c_rImmig_0_7 = new double[]{1.17, 0.7, 0.8, 0.5};
         double[] ratios4c_rImmig_0_8 = new double[]{1.17, 0.8, 0.8, 0.5};
@@ -34,7 +37,7 @@ public class MultispeciesMain {
 
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6", nCores, nReps, ratios4c_rImmig_0_6);
         //BioSystem.oneVeryLongSimulation("ratios4c_rImmig_0_55", 10, ratios4c_rImmig_0_55);
-        BioSystem.stochasticWaitingTime("ratios4c_rImmig_0_6", nCores, nReps, ratios4c_rImmig_0_6);
+        BioSystem.stochasticWaitingTime("ratios4c_rImmig_0_65", nCores, nReps, ratios4c_rImmig_0_65);
         //BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
     }
 }
