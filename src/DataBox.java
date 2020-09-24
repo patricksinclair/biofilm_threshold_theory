@@ -8,10 +8,21 @@ public class DataBox {
     private ArrayList<Double> pop_over_time;
     private ArrayList<Double> new_microhab_times;
 
+    //this variable is used for the species composition runs
+    private ArrayList<ArrayList<ArrayList<Double>>> all_microhab_pops;
+
     private double biofilm_threshold;
     private double r_det_ratio;
     private double time_n1, time_elapsed;
     private double time_n1_mean, time_n1_stDev;
+
+    public DataBox(int runID, ArrayList<Double> times, ArrayList<Double> pop_over_time, ArrayList<Double> new_microhab_times, ArrayList<ArrayList<ArrayList<Double>>> all_microhab_pops){
+        this.runID = runID;
+        this.times = times;
+        this.pop_over_time = pop_over_time;
+        this.new_microhab_times = new_microhab_times;
+        this.all_microhab_pops = all_microhab_pops;
+    }
 
     public DataBox(ArrayList<Double> times, ArrayList<Double> pop_over_time, ArrayList<Double> new_microhab_times){
         this.runID = -999;
@@ -43,6 +54,8 @@ public class DataBox {
     public ArrayList<Double> getTimes(){return times;}
     public ArrayList<Double> getPop_over_time(){return pop_over_time;}
     public ArrayList<Double> getNew_microhab_times(){return new_microhab_times;}
+    public ArrayList<ArrayList<ArrayList<Double>>> getAll_microhab_pops() { return all_microhab_pops; }
+
     public double getBiofilm_threshold(){return biofilm_threshold;}
     public double getR_det_ratio(){return r_det_ratio;}
     public double getTime_n1(){return time_n1;}

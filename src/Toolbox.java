@@ -252,6 +252,62 @@ public class Toolbox {
 
 
 
+    public static void writeGenosOverTimeToCSV(String directoryName, DataBox dataBox){
+        //new method of saving the data for the big geno distb runs.
+        //instead of putting everything in one big file, each run will have a dedicated sub-directory
+        //In each of these sub-directories there will be several csv files which contain the genos in each microhabitat
+        //at a specific timestep.
+        //For simplicity, we'll write these csv files such that each row represents a microhabitat,
+        //then we can transpose the dataframes in python later
+
+
+        //All the data in a run is stored in a databox.
+        //Here, for each databox passed to this method, we iterate through the times list and the 3D arraylist containing all the geno data
+        //use outer index of arraylist to iterate through geno(t) and the times list
+        //use times list for filenames
+
+        try{
+
+            //each run has its own directory so we add the run ID here
+            //subDirectoryName += dataBox.getRunID();
+            directoryName += "/geno_distbs/runID_"+dataBox.getRunID();
+            File directory = new File(directoryName);
+            if(!directory.exists()) directory.mkdirs();
+
+            //iterate over all the timesteps stored
+            for(int t = 0; t < dataBox.getAll_microhab_pops().size(); t++) {
+
+                //create a new file for each timestep
+                //
+                String file_name = "geno_distb"+String.format("-t=%.2f", dataBox.getTimes().get(t));
+                File file = new File(directoryName+"/"+file_name+".csv");
+                //if(!file.exists()) file.createNewFile();
+
+                FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                //iterate over all the microhabitats, new line for each one
+                for(int mh = 0; mh < dataBox.getAll_microhab_pops().get(t).size(); mh++) {
+                    String geno_distb = "mh_"+mh;
+
+                    //now iterate over all the genos in each microhab
+                    for(int g = 0; g < dataBox.getAll_microhab_pops().get(t).get(mh).size(); g++) {
+                        geno_distb += String.format(",%.4f", dataBox.getAll_microhab_pops().get(t).get(mh).get(g));
+                    }
+                    bw.write(geno_distb);
+                    bw.newLine();
+
+                }
+                bw.close();
+            }
+
+        }catch (IOException e){}
+
+
+    }
+
+
+
 
 
 

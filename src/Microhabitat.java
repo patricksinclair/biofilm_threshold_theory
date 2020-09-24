@@ -1,9 +1,11 @@
 import org.apache.commons.math3.distribution.LogNormalDistribution;
 import java.util.ArrayList;
+import java.util.Random;
 
 class Microhabitat {
 
     private LogNormalDistribution MIC_distribution;
+    Random rand = new Random(); //used for checking species distribution.
 
     private double c; //concn of antimicrobial
     private ArrayList<Double> population; //list of MICs of bacteria in microhab
@@ -77,11 +79,11 @@ class Microhabitat {
         return population.get(index);
     }
 
-    private double phi_c(int index){
-        //pharmacodynamic function
-        double cB = c/beta(index);
-        return 1. - (6.*cB*cB)/(5. + cB*cB);
-    }
+//    private double phi_c(int index){
+//        //pharmacodynamic function
+//        double cB = c/beta(index);
+//        return 1. - (6.*cB*cB)/(5. + cB*cB);
+//    }
 
     double replicationRate(int index){
         //there's no biocide so we can take out the pharmacodynamic function
@@ -102,8 +104,13 @@ class Microhabitat {
 
     void addARandomBacterium_x_N(int n_bacteria){
         //No biocide so just have all the bacteria have the same beta, let's set it to 5
+        //UPDATE
+        //now we want to check the species distribution for the immigration and deterioration regimes
+        //so we'll incorporate a species diversity thing via a uniform random distribution of genotypes.
+        //we only want to determine if there's a difference in species composition due to the parameters
+        //so the genotypes have no effect on the bacteria's fitness
         for(int i = 0; i < n_bacteria; i++) {
-            population.add(5.);
+            population.add(rand.nextDouble());
         }
     }
 
