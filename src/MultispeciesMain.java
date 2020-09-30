@@ -11,8 +11,8 @@ public class MultispeciesMain {
         //want to have N* < K for both of these and keep the immigration rate fixed, vary deterioration rate to change
         //what regime we are in
         //values are results_directory_name, file_ID, threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio, K
-        Object[] ms_phase2_params = new Object[]{"speciesComp-phase2-fixedImm-bigK", 0.7, 0.5, 0.8, 0.25, 10000}; //immigration dominated r_im/Kr_det > 1
-        Object[] ms_phase4_params = new Object[]{"speciesComp-phase4-fixedImm-bigK", 0.7, 0.5, 0.8, 1., 10000}; //deterioration dominated r_im/Kr_det < 1
+        Object[] ms_phase2_params = new Object[]{"speciesComp-phase2-fixedImm", 0.7, 0.5, 0.8, 0.25, 1000}; //immigration dominated r_im/Kr_det > 1
+        Object[] ms_phase4_params = new Object[]{"speciesComp-phase4-fixedImm", 0.7, 0.5, 0.8, 1., 1000}; //deterioration dominated r_im/Kr_det < 1
 
         BioSystem.speciesComposition(nCores, nReps, ms_phase2_params);
         
@@ -47,7 +47,7 @@ public class MultispeciesMain {
 
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6", nCores, nReps, ratios4c_rImmig_0_6);
         //BioSystem.oneVeryLongSimulation("ratios4c_rImmig_0_55", 10, ratios4c_rImmig_0_55);
-        BioSystem.stochasticWaitingTime("ratios4c_rImmig_0_65", nCores, nReps, ratios4c_rImmig_0_65);
+        //BioSystem.stochasticWaitingTime("ratios4c_rImmig_0_65", nCores, nReps, ratios4c_rImmig_0_65);
         //BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
     }
 }
