@@ -361,7 +361,7 @@ class BioSystem {
         int nSamples = 50;
         int nRuns = nCores*nBlocks; //total number of simulations performed
 
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/"+params[0];
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/species_comp_results"+params[0];
         String pop_filename = "rIm-"+params[2]+"_rDet-"+params[4]+"-pop_over_time"; //file to save the population size over time
         String microhab_filename = "rIm-"+params[2]+"_rDet-"+params[4]+"-microhabs_over_time"; //file to save the times new microhabitats are added at
 
