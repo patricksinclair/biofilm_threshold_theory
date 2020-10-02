@@ -11,8 +11,9 @@ public class MultispeciesMain {
         //want to have N* < K for both of these and keep the immigration rate fixed, vary deterioration rate to change
         //what regime we are in
         //values are results_directory_name, file_ID, threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio, K
-        Object[] ms_phase2_params = new Object[]{"speciesComp-phase2-fixedImm", 0.7, 0.5, 0.8, 0.25, 1000}; //immigration dominated r_im/Kr_det > 1
-        Object[] ms_phase4_params = new Object[]{"speciesComp-phase4-fixedImm", 0.7, 0.5, 0.8, 1., 1000}; //deterioration dominated r_im/Kr_det < 1
+        //file formatting only had 4 decimal places, so might've mistakenly double counted genotypes due to rounding errors
+        Object[] ms_phase2_params = new Object[]{"speciesComp-phase2-fixedImm-bigK-morePrecise", 0.7, 0.5, 0.8, 0.25, 10000}; //immigration dominated r_im/Kr_det > 1
+        Object[] ms_phase4_params = new Object[]{"speciesComp-phase4-fixedImm-bigK-morePrecise", 0.7, 0.5, 0.8, 1., 10000}; //deterioration dominated r_im/Kr_det < 1
 
         BioSystem.speciesComposition(nCores, nReps, ms_phase2_params);
         
