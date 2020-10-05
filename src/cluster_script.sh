@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bftt_speciesDistb-bigK-preciser-phase2 # job name
+#$ -N bftt_allen_presentation-4c-0.4 # job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file
