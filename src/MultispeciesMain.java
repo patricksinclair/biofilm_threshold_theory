@@ -24,7 +24,7 @@ public class MultispeciesMain {
         double[] ratios4d_rImmig_0_6 = new double[]{0.7, 0.6, 0.8, 0.5};
         double[] ratios4d_rImmig_0_7 = new double[]{0.7, 0.7, 0.8, 0.5};
 
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_4", nCores, nReps, ratios4c_rImmig_0_4);
+        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_4", nCores, nReps, ratios4d_rImmig_0_4);
 
         //params used in the species composition simulations
         //want to have N* < K for both of these and keep the immigration rate fixed, vary deterioration rate to change
