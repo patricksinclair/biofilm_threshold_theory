@@ -292,7 +292,7 @@ public class Toolbox {
 
                     //now iterate over all the genos in each microhab
                     for(int g = 0; g < dataBox.getAll_microhab_pops().get(t).get(mh).size(); g++) {
-                        geno_distb += String.format(",%.6f", dataBox.getAll_microhab_pops().get(t).get(mh).get(g));
+                        geno_distb += String.format(",%.8f", dataBox.getAll_microhab_pops().get(t).get(mh).get(g));
                     }
                     bw.write(geno_distb);
                     bw.newLine();
