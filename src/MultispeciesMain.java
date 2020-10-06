@@ -8,14 +8,7 @@ public class MultispeciesMain {
         int nCores = Integer.parseInt(args[0]); //no. of cores used to run the simulations on the cluster
         int nReps = 5; //no. of simulations run on each core
 
-        //for further comparison on the effects of N*, now doing a third intermidiate value of N* = 0.9
-        //just for "ease" of bookkeeping, this parameter set will be referred to as fig4e_ratios
-        double[] ratios4e_rImmig_0_4 = new double[]{0.9, 0.4, 0.8, 0.5};
-        double[] ratios4e_rImmig_0_5 = new double[]{0.9, 0.5, 0.8, 0.5};
-        double[] ratios4e_rImmig_0_6 = new double[]{0.9, 0.6, 0.8, 0.5};
-        double[] ratios4e_rImmig_0_7 = new double[]{0.9, 0.7, 0.8, 0.5};
 
-        BioSystem.replicateFigure4Solo("ratios4e_rImmig_0_4", nCores, nReps, ratios4e_rImmig_0_4);
 
 
         //params used in the species composition simulations
@@ -23,10 +16,10 @@ public class MultispeciesMain {
         //what regime we are in
         //values are results_directory_name, file_ID, threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio, K
         //increased file formatting to avoid mistakenly double counting genotypes
-//        Object[] ms_phase2_params = new Object[]{"speciesComp-phase2-fixedImm-bigK-mostPrecise", 0.7, 0.5, 0.8, 0.25, 10000}; //immigration dominated r_im/Kr_det > 1
-//        Object[] ms_phase4_params = new Object[]{"speciesComp-phase4-fixedImm-bigK-mostPrecise", 0.7, 0.5, 0.8, 1., 10000}; //deterioration dominated r_im/Kr_det < 1
-//
-//        BioSystem.speciesComposition(nCores, nReps, ms_phase2_params);
+        Object[] ms_phase2_params = new Object[]{"speciesComp-phase2-fixedImm-bigK-mostPrecise", 0.7, 0.5, 0.8, 0.25, 10000}; //immigration dominated r_im/Kr_det > 1
+        Object[] ms_phase4_params = new Object[]{"speciesComp-phase4-fixedImm-bigK-mostPrecise", 0.7, 0.5, 0.8, 1., 10000}; //deterioration dominated r_im/Kr_det < 1
+
+        BioSystem.speciesComposition(nCores, nReps, ms_phase2_params);
 //
 //        //The ratios in this section are used for a more fair comparison between the effects of N*, very similar to the ones used for the stocastic
 //        //versions of figures 4c and d.  The difference being that the two parameter sets now only differ in their values of
@@ -43,8 +36,16 @@ public class MultispeciesMain {
 //        double[] ratios4d_rImmig_0_5 = new double[]{0.7, 0.5, 0.8, 0.5};
 //        double[] ratios4d_rImmig_0_6 = new double[]{0.7, 0.6, 0.8, 0.5};
 //        double[] ratios4d_rImmig_0_7 = new double[]{0.7, 0.7, 0.8, 0.5};
+
+        //for further comparison on the effects of N*, now doing a third intermidiate value of N* = 0.9
+        //just for "ease" of bookkeeping, this parameter set will be referred to as fig4e_ratios
+//        double[] ratios4e_rImmig_0_4 = new double[]{0.9, 0.4, 0.8, 0.5};
+//        double[] ratios4e_rImmig_0_5 = new double[]{0.9, 0.5, 0.8, 0.5};
+//        double[] ratios4e_rImmig_0_6 = new double[]{0.9, 0.6, 0.8, 0.5};
+//        double[] ratios4e_rImmig_0_7 = new double[]{0.9, 0.7, 0.8, 0.5};
 //
-//        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_4", nCores, nReps, ratios4d_rImmig_0_4);
+//        BioSystem.replicateFigure4Solo("ratios4e_rImmig_0_4", nCores, nReps, ratios4e_rImmig_0_4);
+
 
 
         //ratios for the rates taken from the biofilm_threshold_theory paper
