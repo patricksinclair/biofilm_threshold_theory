@@ -357,8 +357,8 @@ class BioSystem {
         //Outputs both the overall population over time for the runs like the other bftt runs,
         //and also the genos over time like in the multispecies runs
         int K = (int)params[5];
-        double duration = 100;
-        int nSamples = 50;
+        double duration = 300;
+        int nSamples = 150;
         int nRuns = nCores*nBlocks; //total number of simulations performed
 
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/species_comp_results/"+params[0];

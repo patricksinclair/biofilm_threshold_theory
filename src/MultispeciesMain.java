@@ -19,7 +19,7 @@ public class MultispeciesMain {
         Object[] ms_phase2_params = new Object[]{"speciesComp-phase2-fixedImm-bigK-mostPrecise", 0.7, 0.5, 0.8, 0.25, 10000}; //immigration dominated r_im/Kr_det > 1
         Object[] ms_phase4_params = new Object[]{"speciesComp-phase4-fixedImm-bigK-mostPrecise", 0.7, 0.5, 0.8, 1., 10000}; //deterioration dominated r_im/Kr_det < 1
 
-        BioSystem.speciesComposition(nCores, nReps, ms_phase2_params);
+        BioSystem.speciesComposition(nCores, nReps, ms_phase4_params);
 //
 //        //The ratios in this section are used for a more fair comparison between the effects of N*, very similar to the ones used for the stocastic
 //        //versions of figures 4c and d.  The difference being that the two parameter sets now only differ in their values of
