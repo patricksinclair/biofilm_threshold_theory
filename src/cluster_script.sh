@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bftt_species_comp_varyingImm-phase2 # job name
+#$ -N bftt_fig4c_compare_rImm_0.55# job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file
