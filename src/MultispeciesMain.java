@@ -6,7 +6,25 @@ public class MultispeciesMain {
 
         //todo - changed nreps from 10 to 5 for the Allen comparison sims
         int nCores = Integer.parseInt(args[0]); //no. of cores used to run the simulations on the cluster
-        int nReps = 5; //no. of simulations run on each core
+        int nBlocks = 10; //no. of blocks of simulations (1 block = 1 rep on all n cores)
+        //Time to nth microhab params
+        int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
+
+        //values are results directory name, immigration ratio, migration ratio, K
+        Object[] powerLaw_histogram_params = new Object[]{"timeTo1Microhab_powerLaw_bigK_results", 0.8, 0.8, 10000};
+        //Do 6 parameter pairs.  2 largest values of t1, next two with biggest values of std(t1), and two random ones
+        // order of array is [n_thresh, det_ratio
+        double[] t1_big_1 = new double[]{1.35, 0.600}; //avg(t1) = 10.745, stdev(t1) = 2.865178
+        double[] t1_big_2 = new double[]{1.20, 0.675}; //avg(t1) = 9.393, stdev(t1) = 2.869919
+        double[] t1_stDev_big_1 = new double[]{0.825, 1.200}; //avg(t1) = 2.8975, stdev(t1) = 5.9702
+        double[] t1_stDev_big_2 = new double[]{0.750, 1.350}; //avg(t1) = 4.7610, stdev(t1) = 1.6565
+        double[] t1_rand_1 = new double[]{0.6, 0.3};
+        double[] t1_rand_2 = new double[]{0.45, 1.2};
+
+        BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_big_1);
+
+
+
 
 
 
@@ -48,7 +66,7 @@ public class MultispeciesMain {
 //        double[] ratios4e_rImmig_0_6 = new double[]{0.9, 0.6, 0.8, 0.5};
 //        double[] ratios4e_rImmig_0_7 = new double[]{0.9, 0.7, 0.8, 0.5};
 //
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nReps, ratios4c_rImmig_0_55);
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nReps, ratios4c_rImmig_0_55);
 
 
 
