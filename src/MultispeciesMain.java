@@ -6,7 +6,7 @@ public class MultispeciesMain {
 
         //todo - changed nreps from 10 to 5 for the Allen comparison sims
         int nCores = Integer.parseInt(args[0]); //no. of cores used to run the simulations on the cluster
-        int nBlocks = 10; //no. of blocks of simulations (1 block = 1 rep on all n cores)
+        int nBlocks = 5; //no. of blocks of simulations (1 block = 1 rep on all n cores)
         //Time to nth microhab params
         int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
 
@@ -21,7 +21,7 @@ public class MultispeciesMain {
         double[] t1_rand_1 = new double[]{0.6, 0.3};
         double[] t1_rand_2 = new double[]{0.45, 1.2};
 
-        BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_big_1);
+        BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_stDev_big_1);
 
 
 
