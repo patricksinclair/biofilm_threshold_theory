@@ -32,7 +32,7 @@ public class MultispeciesMain {
         String t1_stDev_big_1_fileID = String.format("nThresh=%.3f_rDet=%.3f", t1_stDev_big_1_ratios[0], t1_stDev_big_1_ratios[3]);
         String t1_rand_1_fileID      = String.format("nThresh=%.3f_rDet=%.3f", t1_rand_1[0], t1_rand_1[3]);;
 
-        BioSystem.stochasticWaitingTime(t1_stDev_big_1_fileID, nCores, nBlocks, t1_stDev_big_1_ratios);
+        BioSystem.stochasticWaitingTime(t1_rand_1_fileID, nCores, nBlocks, t1_rand_1_ratios);
 
 
 
