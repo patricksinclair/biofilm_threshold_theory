@@ -27,10 +27,11 @@ public class MultispeciesMain {
         //array of the rates used for the N over time method
         //[threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
         double[] t1_stDev_big_1_ratios = new double[]{0.825, 0.8, 0.8, 1.200};
-        double[] t1_rand_1_ratios      = new double[]{0.6,   0.8, 0.8, 0.2};
+        double[] t1_rand_1_ratios      = new double[]{0.6,   0.8, 0.8, 0.3};
         //fileIDs used for the results .csv file
         String t1_stDev_big_1_fileID = String.format("nThresh=%.3f_rDet=%.3f", t1_stDev_big_1_ratios[0], t1_stDev_big_1_ratios[3]);
-        String t1_rand_1_fileID      = String.format("nThresh=%.3f_rDet=%.3f", t1_rand_1[0], t1_rand_1[3]);;
+        String t1_rand_1_fileID      = String.format("nThresh=%.3f_rDet=%.3f", t1_rand_1_ratios[0],      t1_rand_1_ratios[3]);
+
 
         BioSystem.stochasticWaitingTime(t1_stDev_big_1_fileID, nCores, nBlocks, t1_stDev_big_1_ratios);
 
