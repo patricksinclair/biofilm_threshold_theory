@@ -18,11 +18,21 @@ public class MultispeciesMain {
         double[] t1_big_2 = new double[]{1.20, 0.675}; //avg(t1) = 9.393, stdev(t1) = 2.869919
         double[] t1_stDev_big_1 = new double[]{0.825, 1.200}; //avg(t1) = 2.8975, stdev(t1) = 5.9702
         double[] t1_stDev_big_2 = new double[]{0.750, 1.350}; //avg(t1) = 4.7610, stdev(t1) = 1.6565
-        double[] t1_rand_1 = new double[]{0.6, 0.3};
-        double[] t1_rand_2 = new double[]{0.45, 1.2};
+        double[] t1_rand_1 = new double[]{0.6, 0.3}; //avg(t1) = 0.67143, stdev(t1) = 0.010807
+        double[] t1_rand_2 = new double[]{0.45, 1.2}; //avg(t1) = 0.656565, stdev(t1) = 0.019256
 
-        BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_stDev_big_1);
+        //BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_stDev_big_1);
 
+        //For further insight, we'll plot N over time for t1_stDev_big_1.  And t1_rand_1 as well for comparison.
+        //array of the rates used for the N over time method
+        //[threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
+        double[] t1_stDev_big_1_ratios = new double[]{0.825, 0.8, 0.8, 1.200};
+        double[] t1_rand_1_ratios      = new double[]{0.6,   0.8, 0.8, 0.2};
+        //fileIDs used for the results .csv file
+        String t1_stDev_big_1_fileID = String.format("nThresh=%.3f_rDet=%.3f", t1_stDev_big_1_ratios[0], t1_stDev_big_1_ratios[3]);
+        String t1_rand_1_fileID      = String.format("nThresh=%.3f_rDet=%.3f", t1_rand_1[0], t1_rand_1[3]);;
+
+        BioSystem.stochasticWaitingTime(t1_stDev_big_1_fileID, nCores, nBlocks, t1_stDev_big_1_ratios);
 
 
 

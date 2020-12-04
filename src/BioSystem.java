@@ -542,16 +542,17 @@ class BioSystem {
         //cba figuring out a nicer way of doing this, so we'll just set the duration to a long time and make sure the
         //exit condition is properly implemented in updateBiofilmSize()
         //we'll just save all the runs and the time taken to reach each microhab to a dataframe
-        //todo - make sure the exit condition is set to 10 microhabitats
+        //4/12/20 - this method is now being used for the t1 power law parameter pairs.  Using it to get plots of the
+        //population size over N.  Only interested in the first microhabitat, so set exit condition to 2 microhabs
         //do 100 reps for each parameter set
 
-        int thickness_limit = 10;
-        int K = 1000;
+        int thickness_limit = 2;
+        int K = 10000;
         double duration = 1e4; //very long duration, this is only to make sure that we don't miss any datapoints
-        int nSamples = 256; //this is just used to print output now
+        int nSamples = 100; //this is just used to print output now
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/stochastic_lagTime";
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/timeTo1Microhab_powerLaw_bigK_results/t1PowerLaw_pops_over_time";
         String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
         String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
 

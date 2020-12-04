@@ -143,7 +143,7 @@ public class Toolbox {
             //write the headers to the file
             bw.write("t");
             for(DataBox db : dataBoxes){
-                bw.write(", "+db.getRunID());
+                bw.write(","+db.getRunID());
             }
 
 
@@ -159,8 +159,8 @@ public class Toolbox {
 //                    System.out.println(db.getPop_over_time());
 //                    System.out.println();
 
-                    if(t < db.getPop_over_time().size()) bw.write(", "+db.getPop_over_time().get(t));
-                    else bw.write(", ");
+                    if(t < db.getPop_over_time().size()) bw.write(","+db.getPop_over_time().get(t));
+                    else bw.write(",");
                 }
             }
 
@@ -190,7 +190,7 @@ public class Toolbox {
             //write the headers to the file
             bw.write("t");
             for(DataBox db : dataBoxes){
-                bw.write(", "+db.getRunID());
+                bw.write(","+db.getRunID());
             }
 
 
@@ -201,8 +201,8 @@ public class Toolbox {
                 bw.write(String.valueOf(averagedDB.getTimes().get(t)));
 
                 for(DataBox db : dataBoxes){
-                    if(t < db.getNew_microhab_times().size()) bw.write(", "+db.getNew_microhab_times().get(t));
-                    else bw.write(", ");
+                    if(t < db.getNew_microhab_times().size()) bw.write(","+db.getNew_microhab_times().get(t));
+                    else bw.write(",");
                 }
             }
 
