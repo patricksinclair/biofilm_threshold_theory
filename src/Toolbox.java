@@ -31,7 +31,7 @@ public class Toolbox {
             bw.write("runID");
             //time taken to reach microhabitat n
             for(int n = 0; n < N; n++){
-                bw.write(", t_mh_"+n);
+                bw.write(",t_mh_"+n);
             }
 
 
