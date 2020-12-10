@@ -24,7 +24,7 @@ public class MultispeciesMain {
         //10/12/20 - need to do lots of runs for big_1, stDev_big_1, rand_1 and rand_2.
         // do 25 blocks on 20 cores = 500 runs at a time.
         // should be doable on 1 week queue
-        BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_stDev_big_1);
+        BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_rand_1);
 
         //For further insight, we'll plot N over time for t1_stDev_big_1.  And t1_rand_1 as well for comparison.
         //array of the rates used for the N over time method
