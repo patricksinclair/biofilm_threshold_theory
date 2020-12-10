@@ -4,9 +4,9 @@ public class MultispeciesMain {
 
     public static void main(String[] args) {
 
-        //todo - changed nreps from 10 to 5 for the Allen comparison sims
+
         int nCores = Integer.parseInt(args[0]); //no. of cores used to run the simulations on the cluster
-        int nBlocks = 10; //no. of blocks of simulations (1 block = 1 rep on all n cores)
+        int nBlocks = 25; //no. of blocks of simulations (1 block = 1 rep on all n cores)
         //Time to nth microhab params
         int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
 
@@ -21,19 +21,22 @@ public class MultispeciesMain {
         double[] t1_rand_1 = new double[]{0.6, 0.3}; //avg(t1) = 0.67143, stdev(t1) = 0.010807
         double[] t1_rand_2 = new double[]{0.45, 1.2}; //avg(t1) = 0.656565, stdev(t1) = 0.019256
 
-        //BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_stDev_big_1);
+        //10/12/20 - need to do lots of runs for big_1, stDev_big_1, rand_1 and rand_2.
+        // do 25 blocks on 20 cores = 500 runs at a time.
+        // should be doable on 1 week queue
+        BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_big_1);
 
         //For further insight, we'll plot N over time for t1_stDev_big_1.  And t1_rand_1 as well for comparison.
         //array of the rates used for the N over time method
         //[threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
-        double[] t1_stDev_big_1_ratios = new double[]{0.825, 0.8, 0.8, 1.200};
-        double[] t1_rand_1_ratios      = new double[]{0.6,   0.8, 0.8, 0.3};
-        //fileIDs used for the results .csv file
-        String t1_stDev_big_1_fileID = String.format("nThresh=%.3f_rDet=%.3f", t1_stDev_big_1_ratios[0], t1_stDev_big_1_ratios[3]);
-        String t1_rand_1_fileID      = String.format("nThresh=%.3f_rDet=%.3f", t1_rand_1_ratios[0],      t1_rand_1_ratios[3]);
-
-
-        BioSystem.stochasticWaitingTime(t1_stDev_big_1_fileID, nCores, nBlocks, t1_stDev_big_1_ratios);
+//        double[] t1_stDev_big_1_ratios = new double[]{0.825, 0.8, 0.8, 1.200};
+//        double[] t1_rand_1_ratios      = new double[]{0.6,   0.8, 0.8, 0.3};
+//        //fileIDs used for the results .csv file
+//        String t1_stDev_big_1_fileID = String.format("nThresh=%.3f_rDet=%.3f", t1_stDev_big_1_ratios[0], t1_stDev_big_1_ratios[3]);
+//        String t1_rand_1_fileID      = String.format("nThresh=%.3f_rDet=%.3f", t1_rand_1_ratios[0],      t1_rand_1_ratios[3]);
+//
+//
+//        BioSystem.stochasticWaitingTime(t1_stDev_big_1_fileID, nCores, nBlocks, t1_stDev_big_1_ratios);
 
 
 

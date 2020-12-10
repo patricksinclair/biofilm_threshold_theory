@@ -688,7 +688,7 @@ class BioSystem {
         // This method is used to investigate what the shapes of the distributions of the time taken to reach the first microhabitat look like.
         // We'll pick a few parameter pairs from the t1 heatmap, do 100 reps of each of these and then plot a histogram of the time taken.
         // 100 reps = 10 runs on 10 cores.  Try 24 hour queue first.
-        // params = [results directory name, immigration ratio, migration ratio, K
+        // params = [results directory name, immigration ratio, migration ratio, K]
 
         // file structure will be a .csv file for each parameter pair, containing the time taken to reach the first microhabitat.
 
@@ -702,7 +702,7 @@ class BioSystem {
 
         String[] headers = new String[]{"n_thresh", "det_ratio", "time_to_n", "time_elapsed"};
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/"+params[0];
-        String filename = "t1_histogram-N_thresh="+String.format("%.3f", n_thresh)+"-r_det_ratio="+String.format("%.3f", det_ratio);
+        String filename = "t1_histogram-N_thresh="+String.format("%.3f", n_thresh)+"-r_det_ratio="+String.format("%.3f", det_ratio)+"-manyReps";
 
         for(int nb = 0; nb < nBlocks; nb++){
             IntStream.range(nb, (nb+1)*nCores).parallel().forEach(i -> dataBoxes[i] = BioSystem.timeToNthMicrohabPhaseDiagram_subsubroutine(i, duration, params, n_thresh, det_ratio, microhab_lim));
