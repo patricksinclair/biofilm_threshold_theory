@@ -702,7 +702,7 @@ class BioSystem {
 
         String[] headers = new String[]{"n_thresh", "det_ratio", "time_to_n", "time_elapsed"};
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/"+params[0];
-        String filename = "t1_histogram-N_thresh="+String.format("%.3f", n_thresh)+"-r_det_ratio="+String.format("%.3f", det_ratio)+"-manyReps";
+        String filename = "t1_histogram-N_thresh="+String.format("%.3f", n_thresh)+"-r_det_ratio="+String.format("%.3f", det_ratio)+"-manyReps-session_2";
 
         for(int nb = 0; nb < nBlocks; nb++){
             IntStream.range(nb, (nb+1)*nCores).parallel().forEach(i -> dataBoxes[i] = BioSystem.timeToNthMicrohabPhaseDiagram_subsubroutine(i, duration, params, n_thresh, det_ratio, microhab_lim));
