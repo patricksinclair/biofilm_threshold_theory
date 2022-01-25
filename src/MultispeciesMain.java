@@ -6,7 +6,7 @@ public class MultispeciesMain {
 
 
         int nCores = Integer.parseInt(args[0]); //no. of cores used to run the simulations on the cluster
-        int nBlocks = 25; //no. of blocks of simulations (1 block = 1 rep on all n cores)
+        int nBlocks = 5; //no. of blocks of simulations (1 block = 1 rep on all n cores) was 25
         //Time to nth microhab params
         int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
 
@@ -24,7 +24,7 @@ public class MultispeciesMain {
         //10/12/20 - need to do lots of runs for big_1, stDev_big_1, rand_1 and rand_2.
         // do 25 blocks on 20 cores = 500 runs at a time.
         // should be doable on 1 week queue
-        BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_rand_2);
+        //BioSystem.t1_powerLaw(powerLaw_histogram_params, nCores, nBlocks, microhab_lim, t1_rand_2);
 
         //For further insight, we'll plot N over time for t1_stDev_big_1.  And t1_rand_1 as well for comparison.
         //array of the rates used for the N over time method
@@ -80,7 +80,7 @@ public class MultispeciesMain {
 //        double[] ratios4e_rImmig_0_6 = new double[]{0.9, 0.6, 0.8, 0.5};
 //        double[] ratios4e_rImmig_0_7 = new double[]{0.9, 0.7, 0.8, 0.5};
 //
-        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nReps, ratios4c_rImmig_0_55);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
 
 
 

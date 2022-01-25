@@ -434,7 +434,9 @@ class BioSystem {
         //in order to try and highlight the stochastic effects of these simulations, this method doesn't average the runs
         //and instead saves them all individually
 
-        int K = 10000; //carrying capacity of each microhabitat (increased to 10,000 from 1000 here)
+        int K = 10000; //carrying capacity of each microhabitat (increased to 10,000 from 1000 here) todo- also need to increase r_imm
+        rate_ratios[1] = rate_ratios[1]*10; // as K is increased by 10, also increase r_im (as r_im and K both scale with area).
+        System.out.println("increased r_imm: "+ rate_ratios[1]);
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
         double duration = 100.; //100 hour duration
@@ -442,10 +444,12 @@ class BioSystem {
 
         int nRuns = nCores*nBlocks; //total number of simulations performed
 
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/allen_presentation_bigK";
+        //String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/allen_presentation_bigK";
         //String results_directory = "solo_results";
-        String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
-        String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/solo_results_bigK";
+        // the "UPDATED" string refers to the fact that r_im has been scaled with K
+        String pop_filename = fileID+"-stochastic_pop_over_time-UPDATED"; //file to save all the populations over time
+        String microhab_filename = fileID+"-stochastic_microhabs_over_time-UPDATED"; //file to save the times at which new microhabs are created
 
         DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
 
