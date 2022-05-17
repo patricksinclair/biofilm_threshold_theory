@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bftt_bigK_small_tau # job name
+#$ -N bftt_bigK_smaller_tau # job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file

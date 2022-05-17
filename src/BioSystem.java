@@ -37,7 +37,7 @@ class BioSystem {
 //    private double biofilm_threshold = 0.75;
 //    private double immigration_rate = 0.8;
 //    private double migration_rate = 0.2;
-    private double tau = 0.01; //much larger value now that the bug is fixed (reduced to 0.01 for SMALL_TAU runs)
+    private double tau = 0.001; //much larger value now that the bug is fixed (reduced to 0.01 for SMALL_TAU runs, 0.001 FOR SMALLER_TAU)
     private double delta_x = 1.; //thickness of a microhabitat in microns
 
     //this is how big the system can get before we exit. should reduce overall simulation duration
@@ -449,8 +449,8 @@ class BioSystem {
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/solo_results_bigK";
         // the "UPDATED" string refers to the fact that r_im has been scaled with K
         // the "SMALL_TAU" string refers to the reduced initial value of tau
-        String pop_filename = fileID+"-stochastic_pop_over_time-SMALL_TAU"; //file to save all the populations over time
-        String microhab_filename = fileID+"-stochastic_microhabs_over_time-SMALL_TAU"; //file to save the times at which new microhabs are created
+        String pop_filename = fileID+"-stochastic_pop_over_time-SMALLER_TAU"; //file to save all the populations over time
+        String microhab_filename = fileID+"-stochastic_microhabs_over_time-SMALLER_TAU"; //file to save the times at which new microhabs are created
 
         DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
 
