@@ -37,7 +37,7 @@ class BioSystem {
 //    private double biofilm_threshold = 0.75;
 //    private double immigration_rate = 0.8;
 //    private double migration_rate = 0.2;
-    private double tau = 0.1; //much larger value now that the bug is fixed
+    private double tau = 0.01; //much larger value now that the bug is fixed (reduced to 0.01 for SMALL_TAU runs)
     private double delta_x = 1.; //thickness of a microhabitat in microns
 
     //this is how big the system can get before we exit. should reduce overall simulation duration
@@ -434,9 +434,9 @@ class BioSystem {
         //in order to try and highlight the stochastic effects of these simulations, this method doesn't average the runs
         //and instead saves them all individually
 
-        int K = 10000; //carrying capacity of each microhabitat (increased to 10,000 from 1000 here) todo- also need to increase r_imm
-        rate_ratios[1] = rate_ratios[1]*10; // as K is increased by 10, also increase r_im (as r_im and K both scale with area).
-        System.out.println("increased r_imm: "+ rate_ratios[1]);
+        int K = 10000; //carrying capacity of each microhabitat (increased to 10,000 from 1000 here) todo- also need to increase r_imm (ACTUALLY DON'T THINK WE DO).
+        //rate_ratios[1] = rate_ratios[1]*10; // as K is increased by 10, also increase r_im (as r_im and K both scale with area).
+        //System.out.println("increased r_imm: "+ rate_ratios[1]);
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
         double duration = 100.; //100 hour duration
@@ -448,8 +448,9 @@ class BioSystem {
         //String results_directory = "solo_results";
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/solo_results_bigK";
         // the "UPDATED" string refers to the fact that r_im has been scaled with K
-        String pop_filename = fileID+"-stochastic_pop_over_time-UPDATED"; //file to save all the populations over time
-        String microhab_filename = fileID+"-stochastic_microhabs_over_time-UPDATED"; //file to save the times at which new microhabs are created
+        // the "SMALL_TAU" string refers to the reduced initial value of tau
+        String pop_filename = fileID+"-stochastic_pop_over_time-SMALL_TAU"; //file to save all the populations over time
+        String microhab_filename = fileID+"-stochastic_microhabs_over_time-SMALL_TAU"; //file to save the times at which new microhabs are created
 
         DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
 
@@ -466,37 +467,6 @@ class BioSystem {
         Toolbox.writeNewMicrohabTimesToFile(results_directory, microhab_filename, dataBoxes);
     }
 
-
-    static void replicateFigure4(String fileID, int nCores, int nBlocks, double[] rate_ratios){
-
-        int K = 1000; //carrying capacity of each microhabitat
-
-        //method to replicate figure 4 in the biofilm_threshold_theory notes
-        double duration = 100.; //100 hour duration
-        int nSamples = 120; //no. of measurements taken during each run
-
-        int nRuns = nCores*nBlocks; //total number of simulations performed
-
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/results";
-        String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
-        String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
-
-        DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
-
-        for(int j = 0; j < nBlocks; j++){
-            System.out.println("section: "+j);
-
-            IntStream.range(j*nCores, (j+1)*nCores).parallel().forEach(i ->
-                    dataBoxes[i] = replicateFigure4_subroutine(duration, nSamples, i, K, rate_ratios));
-
-        }
-
-        DataBox averagedData = DataBox.averageDataBoxes(dataBoxes);
-
-        Toolbox.writePopOverTimeToFile(results_directory, pop_filename, averagedData);
-        Toolbox.writeNewMicrohabTimesToFile(results_directory, microhab_filename, averagedData);
-
-    }
 
     private static DataBox replicateFigure4_subroutine(double duration, int nSamples, int runID, int K, double[] rate_ratios){
         double threshold_N_ratio = rate_ratios[0];
@@ -533,6 +503,40 @@ class BioSystem {
 
         return new DataBox(runID, times, total_pop_over_time, bs.newMicrohabTimes);
     }
+
+
+    static void replicateFigure4(String fileID, int nCores, int nBlocks, double[] rate_ratios){
+
+        int K = 1000; //carrying capacity of each microhabitat
+
+        //method to replicate figure 4 in the biofilm_threshold_theory notes
+        double duration = 100.; //100 hour duration
+        int nSamples = 120; //no. of measurements taken during each run
+
+        int nRuns = nCores*nBlocks; //total number of simulations performed
+
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/results";
+        String pop_filename = fileID+"-stochastic_pop_over_time"; //file to save all the populations over time
+        String microhab_filename = fileID+"-stochastic_microhabs_over_time"; //file to save the times at which new microhabs are created
+
+        DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
+
+        for(int j = 0; j < nBlocks; j++){
+            System.out.println("section: "+j);
+
+            IntStream.range(j*nCores, (j+1)*nCores).parallel().forEach(i ->
+                    dataBoxes[i] = replicateFigure4_subroutine(duration, nSamples, i, K, rate_ratios));
+
+        }
+
+        DataBox averagedData = DataBox.averageDataBoxes(dataBoxes);
+
+        Toolbox.writePopOverTimeToFile(results_directory, pop_filename, averagedData);
+        Toolbox.writeNewMicrohabTimesToFile(results_directory, microhab_filename, averagedData);
+
+    }
+
+
 
 
 
