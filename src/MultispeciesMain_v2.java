@@ -23,8 +23,8 @@ public class MultispeciesMain_v2 {
         // TODO - DO THIS LATER
 
 
-        // TODO - Figure 4 (the blue-green-purple comparisons of stochastic and deterministic models)
-        // TODO - ONLY NEED TO REDO THE 4c VERSIONS
+        // Figure 4 (the blue-green-purple comparisons of stochastic and deterministic models)
+        // ONLY NEED TO REDO THE 4c VERSIONS (the N* < K ones should still be ok)
         // ratios for the rates taken from the biofilm_threshold_theory paper
         // Figure 4c ratios:
         // arrays containing the ratios in the format:
@@ -32,7 +32,6 @@ public class MultispeciesMain_v2 {
         double[] ratios4c_rImmig_0_55 = new double[]{1.17, 0.55, 0.8, 0.5};
         double[] ratios4c_rImmig_0_6  = new double[]{1.17, 0.6,  0.8, 0.5};
         double[] ratios4c_rImmig_0_65 = new double[]{1.17, 0.65, 0.8, 0.5};
-
         //int nBlocks = 5;
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
@@ -47,12 +46,11 @@ public class MultispeciesMain_v2 {
         // TODO - K = 10,000, duration = 10,000 - ACTUALLY IT'S PROBABLY NOT WORTH DOING THE LONG SIMULATION
         // TODO BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
 
-        // TODO - Supplementary figure 5 (the 4 figures about different growth dynamics)
-        // TODO - have already done r_imm = 0.55 & 0.6 in the above simulations
+        // Supplementary figure 5 (the 4 figures about different growth dynamics)
+        // have already done r_imm = 0.55 & 0.6 in the above simulations
         // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
         double[] ratios4c_rImmig_0_7 = new double[]{1.17, 0.7, 0.8, 0.5};
         double[] ratios4c_rImmig_0_8 = new double[]{1.17, 0.8, 0.8, 0.5};
-
         //int nBlocks = 5;
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_8", nCores, nBlocks, ratios4c_rImmig_0_8);
@@ -63,7 +61,6 @@ public class MultispeciesMain_v2 {
         // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
         double[] ratiosS6_rImmig_0_4 = new double[]{0.7, 0.4, 0.8, 0.9};
         double[] ratiosS6_rImmig_0_5 = new double[]{0.7, 0.5, 0.8, 0.9};
-
         int nBlocks = 5;
         BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_4", nCores, nBlocks, ratiosS6_rImmig_0_4);
         BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_5", nCores, nBlocks, ratiosS6_rImmig_0_5);
