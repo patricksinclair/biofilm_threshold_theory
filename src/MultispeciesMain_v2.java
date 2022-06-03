@@ -48,12 +48,20 @@ public class MultispeciesMain_v2 {
 
         // Supplementary figure 5 (the 4 figures about different growth dynamics)
         // have already done r_imm = 0.55 & 0.6 in the above simulations
+        // TODO - do some intermediate values between 0.7 and 0.8, see if they differ from deterministic model
         // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
-        double[] ratios4c_rImmig_0_7 = new double[]{1.17, 0.7, 0.8, 0.5};
-        double[] ratios4c_rImmig_0_8 = new double[]{1.17, 0.8, 0.8, 0.5};
-        //int nBlocks = 5;
+        double[] ratios4c_rImmig_0_7   = new double[]{1.17, 0.7,   0.8, 0.5};
+        double[] ratios4c_rImmig_0_75  = new double[]{1.17, 0.75,  0.8, 0.5};
+        double[] ratios4c_rImmig_0_775 = new double[]{1.17, 0.775, 0.8, 0.5};
+        double[] ratios4c_rImmig_0_8   = new double[]{1.17, 0.8,   0.8, 0.5};
+        double[] ratios4c_rImmig_0_9   = new double[]{1.17, 0.9,   0.8, 0.5};
+
+        int nBlocks = 5;
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_75",  nCores, nBlocks, ratios4c_rImmig_0_75);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_775", nCores, nBlocks, ratios4c_rImmig_0_775);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_8", nCores, nBlocks, ratios4c_rImmig_0_8);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_9",   nCores, nBlocks, ratios4c_rImmig_0_9);
 
 
         // TODO - Supplementary figure S6 (the 2 figures about different growth dynamics)
@@ -61,9 +69,9 @@ public class MultispeciesMain_v2 {
         // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
         double[] ratiosS6_rImmig_0_4 = new double[]{0.7, 0.4, 0.8, 0.9};
         double[] ratiosS6_rImmig_0_5 = new double[]{0.7, 0.5, 0.8, 0.9};
-        int nBlocks = 5;
-        BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_4", nCores, nBlocks, ratiosS6_rImmig_0_4);
-        BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_5", nCores, nBlocks, ratiosS6_rImmig_0_5);
+//        int nBlocks = 5;
+//        BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_4", nCores, nBlocks, ratiosS6_rImmig_0_4);
+//        BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_5", nCores, nBlocks, ratiosS6_rImmig_0_5);
 
 
 
