@@ -33,17 +33,17 @@ public class MultispeciesMain_v2 {
         double[] ratios4c_rImmig_0_6  = new double[]{1.17, 0.6,  0.8, 0.5};
         double[] ratios4c_rImmig_0_65 = new double[]{1.17, 0.65, 0.8, 0.5};
 
-//        int nBlocks = 5;
-//        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
-//        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
-//        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
+        //int nBlocks = 5;
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
 
-         int nBlocks = 5;
+        //int nBlocks = 5;
         // TODO - Supplementary Figure 4 (the three figures about increasing K from 1000 -> 10,000)
         // TODO - HAVE ALREADY DONE K = 10,000, duration = 100 IN THE ABOVE rImm = 0.55 SIMULATION
         // TODO - NEED TO CHANGE PARAMS IN replicateFigure4Solo AND CHANGE FILENAMES (CHECK bf_thresh_theory_plotter.ipynb)
-        // TODO - K = 1000, duration = 100
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
+        // K = 1000, duration = 100
+        // BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
         // TODO - K = 10,000, duration = 10,000
         // TODO BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
 
@@ -52,6 +52,10 @@ public class MultispeciesMain_v2 {
         // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
         double[] ratios4c_rImmig_0_7 = new double[]{1.17, 0.7, 0.8, 0.5};
         double[] ratios4c_rImmig_0_8 = new double[]{1.17, 0.8, 0.8, 0.5};
+
+        int nBlocks = 5;
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_8", nCores, nBlocks, ratios4c_rImmig_0_8);
 
 //        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
 
