@@ -479,7 +479,7 @@ class BioSystem {
 
         //String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/allen_presentation_bigK";
         //String results_directory = "solo_results";
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory_v2/solo_results_v2";
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory_v2/solo_results_bigK_v2";
         String pop_filename = fileID+"-stochastic_pop_over_time_v2"; //file to save all the populations over time
         String microhab_filename = fileID+"-stochastic_microhabs_over_time_v2"; //file to save the times at which new microhabs are created
 

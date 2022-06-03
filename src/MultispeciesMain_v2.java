@@ -44,7 +44,7 @@ public class MultispeciesMain_v2 {
         // TODO - NEED TO CHANGE PARAMS IN replicateFigure4Solo AND CHANGE FILENAMES (CHECK bf_thresh_theory_plotter.ipynb)
         // K = 1000, duration = 100
         // BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
-        // TODO - K = 10,000, duration = 10,000
+        // TODO - K = 10,000, duration = 10,000 - ACTUALLY IT'S PROBABLY NOT WORTH DOING THE LONG SIMULATION
         // TODO BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
 
         // TODO - Supplementary figure 5 (the 4 figures about different growth dynamics)
@@ -53,11 +53,22 @@ public class MultispeciesMain_v2 {
         double[] ratios4c_rImmig_0_7 = new double[]{1.17, 0.7, 0.8, 0.5};
         double[] ratios4c_rImmig_0_8 = new double[]{1.17, 0.8, 0.8, 0.5};
 
-        int nBlocks = 5;
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_8", nCores, nBlocks, ratios4c_rImmig_0_8);
+        //int nBlocks = 5;
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_8", nCores, nBlocks, ratios4c_rImmig_0_8);
 
-//        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
+
+        // TODO - Supplementary figure S6 (the 2 figures about different growth dynamics)
+        // TODO - The original versions of these might actually be ok, as N* < K, but good to make sure
+        // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
+        double[] ratiosS6_rImmig_0_4 = new double[]{0.7, 0.4, 0.8, 0.9};
+        double[] ratiosS6_rImmig_0_5 = new double[]{0.7, 0.5, 0.8, 0.9};
+
+        int nBlocks = 5;
+        BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_4", nCores, nBlocks, ratiosS6_rImmig_0_4);
+        BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_5", nCores, nBlocks, ratiosS6_rImmig_0_5);
+
+
 
 
 
