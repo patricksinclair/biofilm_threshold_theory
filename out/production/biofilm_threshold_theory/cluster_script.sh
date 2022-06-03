@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bftt_t1_powerLaw-NvsT-nThresh-0.45-session2# job name
+#$ -N bftt_v2_bigK_smaller_tau # job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file
@@ -8,7 +8,7 @@
 # Choose a queue:
 # Check options with "qconf -sql"
 # Check details with "qconf -sq <q-name>"
-#$ -q cm.7.day
+##$ -q cm.7.day # the sopa 1 day queue seems to have been removed. (-q option no longer needed)
 
 # Choose a parallel environment:
 # Check options with "qconf -spl"

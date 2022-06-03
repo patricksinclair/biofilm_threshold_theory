@@ -37,7 +37,7 @@ class BioSystem {
 //    private double biofilm_threshold = 0.75;
 //    private double immigration_rate = 0.8;
 //    private double migration_rate = 0.2;
-    private double tau = 0.001; //much larger value now that the bug is fixed (reduced to 0.01 for SMALL_TAU runs, 0.001 FOR SMALLER_TAU)
+    private double tau = 0.1; //much larger value now that the bug is fixed (reduced to 0.01 for SMALL_TAU runs, 0.001 FOR SMALLER_TAU)
     private double delta_x = 1.; //thickness of a microhabitat in microns
 
     //this is how big the system can get before we exit. should reduce overall simulation duration
@@ -202,8 +202,8 @@ class BioSystem {
         //todo - lag time sims
         //todo - this might actually be a better way to do things, seeing as now we won't have to do an arraylist size check each time
         //todo - can just add a +1 to make it equivalent to the old one
-//        this stops sims going onn unnecessarily too long. if the biofilm reaches the thickness limit then we record the
-//        time this happened at and move on
+        //this stops sims going onn unnecessarily too long. if the biofilm reaches the thickness limit then we record the
+        //time this happened at and move on
         //if(getSystemSize()==thickness_limit){
         if(immigration_index == thickness_limit){
             exit_time = time_elapsed;
@@ -223,11 +223,14 @@ class BioSystem {
     public void performAction(){
 
         //need to take out all the death stuff here as there's no biocide or uniform death rate
+        //UPDATE 2/6/22 - Need to add death in to incorporate the logistic growth stuff
+        // the added lines will be annotated by // v2
 
         double tau_step = tau;
 
         int system_size = microhabitats.size();
         int[][] replication_allocations;
+        int[][] death_allocations; //v2
         int[][] migration_allocations;
         int[] detachment_allocations;
         int[] original_popsizes;
@@ -243,6 +246,7 @@ class BioSystem {
             poiss_migration_edge = new PoissonDistribution(0.5*r_migration*tau_step);
 
             replication_allocations = new int[system_size][];
+            death_allocations = new int[system_size][]; //v2
             migration_allocations = new int[system_size][];
             original_popsizes = new int[system_size];
             detachment_allocations = new int[microhabitats.get(immigration_index).getN()];
@@ -263,7 +267,30 @@ class BioSystem {
                         PoissonDistribution poiss_replication = new PoissonDistribution(g_rate*tau_step);
                         poiss_replication.reseedRandomGenerator(rand.nextLong());
                         n_replications[bac_index] = poiss_replication.sample();
+
+                    }// v2 - this whole else statement was added in the v2 version
+                    else {
+                        double d_rate = Math.abs(g_rate); // v2 - death rate must be positive for Poisson
+                        PoissonDistribution poiss_death = new PoissonDistribution(d_rate*tau_step);
+                        poiss_death.reseedRandomGenerator(rand.nextLong());
+                        n_deaths[bac_index] = poiss_death.sample();
                     }
+
+                    // v2 - added chunk begins here ///////////////////////
+                    //Bacteria cannot replicate and die in the same timestep
+                    if(n_deaths[bac_index] > 0 && n_replications[bac_index] > 0){
+                        n_tauHalves++;
+                        tau_step /= 2;
+                        continue whileloop;
+                    }
+
+                    //bacteria can't die twice, so need to handle this
+                    if(n_deaths[bac_index] > 1) {
+                        n_tauHalves++;
+                        tau_step /= 2;
+                        continue whileloop;
+                    }
+                    // v2 - added chunk ends here ////////////////////////////
 
                     ///////// MIGRATIONS AND DETACHMENTS //////////////////////
                     //only non-dead bacteria can migrate or detach
@@ -311,6 +338,7 @@ class BioSystem {
                     //////////////////////////////////////////////////////
                 }
                 replication_allocations[mh_index] = n_replications;
+                death_allocations[mh_index] = n_deaths; // v2
                 migration_allocations[mh_index] = n_migrations;
                 original_popsizes[mh_index] = microhabitats.get(mh_index).getN();
             }
@@ -324,9 +352,19 @@ class BioSystem {
             //iterate backwards over the bacteria so we can remove them without getting index errors
             for(int bac_index = original_popsizes[mh_index]-1; bac_index >= 0; bac_index--){
 
+                // v2 - added chunk begins here
+                if(death_allocations[mh_index][bac_index]!= 0) {
+                    microhabitats.get(mh_index).removeABacterium(bac_index);
+                    //death_counts++;
+                }
 
-                microhabitats.get(mh_index).replicateABacterium_x_N(bac_index, replication_allocations[mh_index][bac_index]);
-                n_replications += replication_allocations[mh_index][bac_index];
+                else {
+                // v2 - added chunk ends here
+
+                    microhabitats.get(mh_index).replicateABacterium_x_N(bac_index, replication_allocations[mh_index][bac_index]);
+                    n_replications += replication_allocations[mh_index][bac_index];
+
+                } // v2 - also added this } bracket
 
                 if(system_size > 1){
                     if(migration_allocations[mh_index][bac_index] != 0) migrate(mh_index, bac_index);
@@ -384,7 +422,6 @@ class BioSystem {
 
     }
 
-
     private static DataBox speciesComposition_subroutine(double duration, int nSamples, int runID, Object[] params){
 
         //threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio, K
@@ -435,22 +472,17 @@ class BioSystem {
         //and instead saves them all individually
 
         int K = 10000; //carrying capacity of each microhabitat (increased to 10,000 from 1000 here) todo- also need to increase r_imm (ACTUALLY DON'T THINK WE DO).
-        //rate_ratios[1] = rate_ratios[1]*10; // as K is increased by 10, also increase r_im (as r_im and K both scale with area).
-        //System.out.println("increased r_imm: "+ rate_ratios[1]);
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
         double duration = 100.; //100 hour duration
         int nSamples = 90; //no. of measurements taken during each run
-
         int nRuns = nCores*nBlocks; //total number of simulations performed
 
         //String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/allen_presentation_bigK";
         //String results_directory = "solo_results";
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/solo_results_bigK";
-        // the "UPDATED" string refers to the fact that r_im has been scaled with K
-        // the "SMALL_TAU" string refers to the reduced initial value of tau
-        String pop_filename = fileID+"-stochastic_pop_over_time-SMALLER_TAU"; //file to save all the populations over time
-        String microhab_filename = fileID+"-stochastic_microhabs_over_time-SMALLER_TAU"; //file to save the times at which new microhabs are created
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory_v2/solo_results_bigK_v2";
+        String pop_filename = fileID+"-stochastic_pop_over_time_v2"; //file to save all the populations over time
+        String microhab_filename = fileID+"-stochastic_microhabs_over_time_v2"; //file to save the times at which new microhabs are created
 
         DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
 
@@ -461,7 +493,6 @@ class BioSystem {
                     dataBoxes[i] = replicateFigure4_subroutine(duration, nSamples, i, K, rate_ratios));
 
         }
-
 
         Toolbox.writePopOverTimeToFile(results_directory, pop_filename, dataBoxes);
         Toolbox.writeNewMicrohabTimesToFile(results_directory, microhab_filename, dataBoxes);
@@ -477,16 +508,13 @@ class BioSystem {
         double interval = duration/(double)nSamples;
         boolean alreadyRecorded = false;
 
-
         BioSystem bs = new BioSystem(K, threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio);
         ArrayList<Double> times = new ArrayList<>(); //sample times
         ArrayList<Double> total_pop_over_time = new ArrayList<>(); //size of population over time
 
         while(bs.time_elapsed < duration+0.2*interval){
 
-
             if((bs.getTimeElapsed()%interval <= 0.1*interval) && !alreadyRecorded){
-
 
                 System.out.println("runID: "+runID+"\tt: "+bs.time_elapsed);
                 times.add(bs.time_elapsed);
@@ -494,13 +522,10 @@ class BioSystem {
 
                 alreadyRecorded = true;
             }
-
             if(bs.getTimeElapsed()%interval >= 0.1*interval) alreadyRecorded = false;
 
             bs.performAction();
-
         }
-
         return new DataBox(runID, times, total_pop_over_time, bs.newMicrohabTimes);
     }
 
@@ -535,12 +560,6 @@ class BioSystem {
         Toolbox.writeNewMicrohabTimesToFile(results_directory, microhab_filename, averagedData);
 
     }
-
-
-
-
-
-
 
 
     public static void stochasticWaitingTime(String fileID, int nCores, int nBlocks, double[] rate_ratios){
@@ -622,7 +641,7 @@ class BioSystem {
         //todo - make sure the failure limit thing is set up correctly
 
         String[] headers = new String[]{"n_thresh", "det_ratio", "time_to_n", "time_elapsed"};
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/"+params[0];
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory_v2/"+params[0];
 
         double duration = 1000.;
         int nMeasurements = 20;
@@ -673,7 +692,7 @@ class BioSystem {
             //got rid of the alreadyRecorded stuff as it doesn't really matter here
             if((bs.getTimeElapsed()%interval >= 0. && bs.getTimeElapsed()%interval <= 0.1*interval)){
 
-                System.out.println("rep : "+i+"\ttau: "+bs.tau+"\tN*: "+bs.biofilm_threshold+"\td_rate: "+bs.r_deterioration+"\tt: "+bs.getTimeElapsed()+"\tpop size: "+bs.getTotalN()+"\tbf_edge: "+bs.getBiofilmEdge()+"\tsystem size: "+bs.getSystemSize()+"\tc_max: "+bs.c_max);
+                System.out.println("rep : "+i+"\ttau: "+bs.tau+"\tN*: "+bs.biofilm_threshold+"\tdet_rate: "+bs.r_deterioration+"\tt: "+bs.getTimeElapsed()+"\tpop size: "+bs.getTotalN()+"\tbf_edge: "+bs.getBiofilmEdge()+"\tsystem size: "+bs.getSystemSize()+"\tc_max: "+bs.c_max);
                 //alreadyRecorded = true;
             }
 
@@ -699,7 +718,6 @@ class BioSystem {
         // params = [results directory name, immigration ratio, migration ratio, K]
 
         // file structure will be a .csv file for each parameter pair, containing the time taken to reach the first microhabitat.
-
         // can use the time_to first microhabitat subroutine to get the data
 
         int nRuns = nCores*nBlocks;
@@ -709,7 +727,7 @@ class BioSystem {
         double duration = 1000.;
 
         String[] headers = new String[]{"n_thresh", "det_ratio", "time_to_n", "time_elapsed"};
-        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory/"+params[0];
+        String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory_v2/"+params[0];
         String filename = "t1_histogram-N_thresh="+String.format("%.3f", n_thresh)+"-r_det_ratio="+String.format("%.3f", det_ratio)+"-manyReps-session_2";
 
         for(int nb = 0; nb < nBlocks; nb++){
