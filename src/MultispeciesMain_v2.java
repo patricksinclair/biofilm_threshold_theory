@@ -13,7 +13,7 @@ public class MultispeciesMain_v2 {
         int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
         // values are results directory name, immigration ratio, migration ratio, K
         Object[] phase_diag_params = new Object[]{"timeTo1Microhab_phaseDiagram_bigK_v2", 0.8, 0.8, 10000};
-        BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
+        //BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
         // TODO - Maybe do a second batch, if so NEED TO CHANGE FILE NAME IN timeToNthMicrohabPhaseDiagram
         // TODO? BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
 
@@ -34,9 +34,9 @@ public class MultispeciesMain_v2 {
         double[] ratios4c_rImmig_0_65 = new double[]{1.17, 0.65, 0.8, 0.5};
 
         int nBlocks = 5;
-        // TODO BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
-        // TODO BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
-        // TODO BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
 
         // int nBlocks = 5;
         // TODO - Supplementary Figure 4 (the three figures about increasing K from 1000 -> 10,000)
