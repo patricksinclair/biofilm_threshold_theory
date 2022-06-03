@@ -471,7 +471,7 @@ class BioSystem {
         //in order to try and highlight the stochastic effects of these simulations, this method doesn't average the runs
         //and instead saves them all individually
 
-        int K = 10000; //carrying capacity of each microhabitat (increased to 10,000 from 1000 here) todo- also need to increase r_imm (ACTUALLY DON'T THINK WE DO).
+        int K = 10000; //carrying capacity of each microhabitat (increased to 10,000 from 1000 here)
 
         //method to replicate figure 4 in the biofilm_threshold_theory notes
         double duration = 100.; //100 hour duration
