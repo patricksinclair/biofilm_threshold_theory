@@ -269,7 +269,7 @@ class BioSystem {
                         n_replications[bac_index] = poiss_replication.sample();
 
                     }// v2 - this whole else statement was added in the v2 version
-                    else {
+                    else if(g_rate < 0.){
                         double d_rate = Math.abs(g_rate); // v2 - death rate must be positive for Poisson
                         PoissonDistribution poiss_death = new PoissonDistribution(d_rate*tau_step);
                         poiss_death.reseedRandomGenerator(rand.nextLong());
@@ -692,7 +692,12 @@ class BioSystem {
             //got rid of the alreadyRecorded stuff as it doesn't really matter here
             if((bs.getTimeElapsed()%interval >= 0. && bs.getTimeElapsed()%interval <= 0.1*interval)){
 
-                System.out.println("rep : "+i+"\ttau: "+bs.tau+"\tN*: "+bs.biofilm_threshold+"\tdet_rate: "+bs.r_deterioration+"\tt: "+bs.getTimeElapsed()+"\tpop size: "+bs.getTotalN()+"\tbf_edge: "+bs.getBiofilmEdge()+"\tsystem size: "+bs.getSystemSize()+"\tc_max: "+bs.c_max);
+                System.out.println("rep: "+i+"\t"+String.format("tau: %.3f\t", bs.tau)+String.format("N*: %.3f\t", bs.biofilm_threshold)
+                                    +String.format("det_rate: %.3f\t", bs.r_deterioration)+ String.format("t: %.3f\t", bs.getTimeElapsed())
+                                    +String.format("pop_size: %d\t", bs.getTotalN())+String.format("bf_edge: %d\t", bs.getBiofilmEdge())
+                                    +String.format("system_size: %d\t", bs.getSystemSize())+String.format("c_max: %.3f", bs.c_max));
+
+//                System.out.println("rep: "+i+"\ttau: "+bs.tau+"\tN*: "+bs.biofilm_threshold+"\tdet_rate: "+bs.r_deterioration+"\tt: "+bs.getTimeElapsed()+"\tpop size: "+bs.getTotalN()+"\tbf_edge: "+bs.getBiofilmEdge()+"\tsystem size: "+bs.getSystemSize()+"\tc_max: "+bs.c_max);
                 //alreadyRecorded = true;
             }
 
@@ -700,7 +705,6 @@ class BioSystem {
 
             bs.performAction();
         }
-
 
         return new DataBox(n_thresh, det_ratio, bs.exit_time, bs.time_elapsed);
     }

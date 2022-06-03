@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bftt_v2_bigK_smaller_tau # job name
+#$ -N bftt_v2_phase_diagram # job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file
@@ -13,7 +13,7 @@
 # Choose a parallel environment:
 # Check options with "qconf -spl"
 # Check details with "qconf -sp <pe-name>"
-#$ -pe mpi 20       # asks for n processors for an mpi job
+#$ -pe mpi 25       # asks for n processors for an mpi job
 #$ -l h_vmem=2G     # asks for n Gb of memory
 # Send mail at submission and completion of script
 #$ -m be
@@ -41,6 +41,6 @@ time {
 # put the usual mpirun command here
 # the shell variable $NSLOTS is the number of cores you asked for above
 
-java -cp ".:java_jars/*" MultispeciesMain $NSLOTS > bftt_log.out
+java -cp ".:java_jars/*" MultispeciesMain_v2 $NSLOTS > bftt_log.out
 
 }

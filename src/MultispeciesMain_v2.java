@@ -6,7 +6,7 @@ public class MultispeciesMain_v2 {
         // TODO - once the simulation is done, remove the "TODO"
 
         int nCores = Integer.parseInt(args[0]); //no. of cores used to run the simulations on the cluster
-
+        //int nCores = 1;
         // TODO - Figure 3 (the t1 phase diagram - the one with the pink deterministic boundary surrounded by 4 histograms)
         // TODO - SET nCores TO 25 FOR THIS ONE, WE DON'T DO MULTIPLE REPS CURRENTLY
         //Time to nth microhab params
