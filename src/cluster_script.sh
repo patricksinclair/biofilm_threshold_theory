@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#$ -N bftt_v2_K_1000_rIm0.7 # job name
+#$ -N bftt_v2_fig4_improved # job name
 #$ -V           # use all shell environment variables
 #$ -cwd         # run job in working directory
 # #$ -j y         # merge stdout and stderr to one file
