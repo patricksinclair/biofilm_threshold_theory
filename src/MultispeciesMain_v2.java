@@ -32,47 +32,71 @@ public class MultispeciesMain_v2 {
         double[] ratios4c_rImmig_0_55 = new double[]{1.17, 0.55, 0.8, 0.5};
         double[] ratios4c_rImmig_0_6  = new double[]{1.17, 0.6,  0.8, 0.5};
         double[] ratios4c_rImmig_0_65 = new double[]{1.17, 0.65, 0.8, 0.5};
+        double[] ratios4c_rImmig_0_7  = new double[]{1.17, 0.7,   0.8, 0.5};
         //int nBlocks = 5;
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7",  nCores, nBlocks, ratios4c_rImmig_0_7);
 
-        //int nBlocks = 5;
+        int nBlocks = 5;
         // TODO - Supplementary Figure 4 (the three figures about increasing K from 1000 -> 10,000)
-        // TODO - HAVE ALREADY DONE K = 10,000, duration = 100 IN THE ABOVE rImm = 0.55 SIMULATION
         // TODO - NEED TO CHANGE PARAMS IN replicateFigure4Solo AND CHANGE FILENAMES (CHECK bf_thresh_theory_plotter.ipynb)
         // K = 1000, duration = 100
         // BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
-        // TODO - K = 10,000, duration = 10,000 - ACTUALLY IT'S PROBABLY NOT WORTH DOING THE LONG SIMULATION
+        // TODO - K = 10,000, duration = 10,000 - ACTUALLY IT'S PROBABLY NOT WORTH DOING THE LONG SIMULATION FOR rImm = 0.55 (4c ratio)
         // TODO BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
+        // TODO - Might be worth doing the K comparison plots with a v2 Fig4c ratio that might actually get close
+        // TODO - to the transition density. Let's try rImm = 0.7 (this doesn't transition at K=10,000)
+        // rImm = 0.7, K = 1000, duration = 1000
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
+
 
         // Supplementary figure 5 (the 4 figures about different growth dynamics)
         // have already done r_imm = 0.55 & 0.6 in the above simulations
-        // TODO - do some intermediate values between 0.7 and 0.8, see if they differ from deterministic model
+        // do some intermediate values between 0.7 and 0.8, see if they differ from deterministic model (THEY DO)
         // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
-        double[] ratios4c_rImmig_0_7   = new double[]{1.17, 0.7,   0.8, 0.5};
         double[] ratios4c_rImmig_0_75  = new double[]{1.17, 0.75,  0.8, 0.5};
         double[] ratios4c_rImmig_0_775 = new double[]{1.17, 0.775, 0.8, 0.5};
         double[] ratios4c_rImmig_0_8   = new double[]{1.17, 0.8,   0.8, 0.5};
         double[] ratios4c_rImmig_0_9   = new double[]{1.17, 0.9,   0.8, 0.5};
 
-        int nBlocks = 5;
-        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_75",  nCores, nBlocks, ratios4c_rImmig_0_75);
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_775", nCores, nBlocks, ratios4c_rImmig_0_775);
+        //int nBlocks = 5;
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_75",  nCores, nBlocks, ratios4c_rImmig_0_75);
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_775", nCores, nBlocks, ratios4c_rImmig_0_775);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_8", nCores, nBlocks, ratios4c_rImmig_0_8);
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_9",   nCores, nBlocks, ratios4c_rImmig_0_9);
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_9",   nCores, nBlocks, ratios4c_rImmig_0_9);
 
 
-        // TODO - Supplementary figure S6 (the 2 figures about different growth dynamics)
-        // TODO - The original versions of these might actually be ok, as N* < K, but good to make sure
+        // Supplementary figure S6 (the 2 figures about different growth dynamics)
+        // The original versions of these should actually be ok, as N* < K, but good to make sure - ORIGINALS ARE OK
         // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
         double[] ratiosS6_rImmig_0_4 = new double[]{0.7, 0.4, 0.8, 0.9};
         double[] ratiosS6_rImmig_0_5 = new double[]{0.7, 0.5, 0.8, 0.9};
-//        int nBlocks = 5;
-//        BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_4", nCores, nBlocks, ratiosS6_rImmig_0_4);
-//        BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_5", nCores, nBlocks, ratiosS6_rImmig_0_5);
+        //int nBlocks = 5;
+        //BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_4", nCores, nBlocks, ratiosS6_rImmig_0_4);
+        //BioSystem.replicateFigure4Solo("ratiosS6_rImmig_0_5", nCores, nBlocks, ratiosS6_rImmig_0_5);
 
+
+        // TODO - The inclusion of logistic death means that rImm needs to be increased to get the behaviour that the model
+        // TODO - used to show (for cases where N* > K).  So to recreate the old Figure 4c, we'll change the immigration rates
+        // TODO - from rImm = (0.55, 0.6, 0.65) -> rImm_v2 = (0.7, 0.75, 0.78).  The first two are already done above.
+        // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
+        double[] ratios4c_rImmig_0_78  = new double[]{1.17, 0.78,  0.8, 0.5};
+
+        // TODO int nBlocks = 5;
+        // TODO BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_78",  nCores, nBlocks, ratios4c_rImmig_0_78);
+
+        // TODO - Also need to do the corresponding parameter set for Figure 4a (previously 4d) where N* = 0.7
+        // TODO - Keep the naming convention as 4d, I know the whole scheme is a mess at this point
+        // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
+        double[] ratios4d_rImmig_0_7  = new double[]{0.7, 0.7,  0.8, 0.5};
+        double[] ratios4d_rImmig_0_75 = new double[]{0.7, 0.75, 0.8, 0.5};
+        double[] ratios4d_rImmig_0_78 = new double[]{0.7, 0.78, 0.8, 0.5};
+
+        // TODO BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_7",   nCores, nBlocks, ratios4d_rImmig_0_7);
+        // TODO BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_75",  nCores, nBlocks, ratios4d_rImmig_0_75);
+        // TODO BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_78",  nCores, nBlocks, ratios4d_rImmig_0_78);
 
 
 
