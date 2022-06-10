@@ -651,9 +651,9 @@ class BioSystem {
         double r_det_ratio_min = 0., r_det_ratio_max = 1.5;
         double r_det_ratio_increment = (r_det_ratio_max - r_det_ratio_min)/nMeasurements;
         //ArrayList<DataBox[]> dataBoxes = new ArrayList<>();
-
-        for(int nt = 0; nt <= nMeasurements; nt++){
-            for(int dr = 0; dr <= nMeasurements; dr++){
+        // todo - changed starting indices to skip over ones already done
+        for(int nt = 20; nt <= nMeasurements; nt++){
+            for(int dr = 7; dr <= nMeasurements; dr++){
                 double n_thresh = N_thresh_min + (nt*N_thresh_increment);
                 double det_ratio = r_det_ratio_min + (dr*r_det_ratio_increment);
 

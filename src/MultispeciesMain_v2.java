@@ -13,7 +13,7 @@ public class MultispeciesMain_v2 {
         int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
         // values are results directory name, immigration ratio, migration ratio, K
         Object[] phase_diag_params = new Object[]{"timeTo1Microhab_phaseDiagram_bigK_v2", 0.8, 0.8, 10000};
-        //BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
+        BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
         // TODO - Maybe do a second batch, if so NEED TO CHANGE FILE NAME IN timeToNthMicrohabPhaseDiagram
         // TODO? BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
 
@@ -32,7 +32,7 @@ public class MultispeciesMain_v2 {
         double[] ratios4c_rImmig_0_55 = new double[]{1.17, 0.55, 0.8, 0.5};
         double[] ratios4c_rImmig_0_6  = new double[]{1.17, 0.6,  0.8, 0.5};
         double[] ratios4c_rImmig_0_65 = new double[]{1.17, 0.65, 0.8, 0.5};
-        double[] ratios4c_rImmig_0_7  = new double[]{1.17, 0.7,   0.8, 0.5};
+        double[] ratios4c_rImmig_0_7  = new double[]{1.17, 0.7,  0.8, 0.5};
         //int nBlocks = 5;
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_55", nCores, nBlocks, ratios4c_rImmig_0_55);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
@@ -51,7 +51,7 @@ public class MultispeciesMain_v2 {
         // rImm = 0.7, K = 1000, duration = 100
         // BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
         // TODO - rImm = 0.7, K = 10,000, duration = 10,000
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7", nCores, nBlocks, ratios4c_rImmig_0_7);
 
 
         // Supplementary figure 5 (the 4 figures about different growth dynamics)
@@ -86,8 +86,8 @@ public class MultispeciesMain_v2 {
         // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
         double[] ratios4c_rImmig_0_78  = new double[]{1.17, 0.78,  0.8, 0.5};
 
-//        int nBlocks = 5;
-//        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_78",  nCores, nBlocks, ratios4c_rImmig_0_78);
+        //int nBlocks = 5;
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_78",  nCores, nBlocks, ratios4c_rImmig_0_78);
 
         // TODO - Also need to do the corresponding parameter set for Figure 4a (previously 4d) where N* = 0.7
         // TODO - Keep the naming convention as 4d, I know the whole scheme is a mess at this point
@@ -96,9 +96,9 @@ public class MultispeciesMain_v2 {
         double[] ratios4d_rImmig_0_75 = new double[]{0.7, 0.75, 0.8, 0.5};
         double[] ratios4d_rImmig_0_78 = new double[]{0.7, 0.78, 0.8, 0.5};
 
-//        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_7",   nCores, nBlocks, ratios4d_rImmig_0_7);
-//        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_75",  nCores, nBlocks, ratios4d_rImmig_0_75);
-//        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_78",  nCores, nBlocks, ratios4d_rImmig_0_78);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_7",   nCores, nBlocks, ratios4d_rImmig_0_7);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_75",  nCores, nBlocks, ratios4d_rImmig_0_75);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_78",  nCores, nBlocks, ratios4d_rImmig_0_78);
 
 
 
