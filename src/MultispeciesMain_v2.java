@@ -13,14 +13,20 @@ public class MultispeciesMain_v2 {
         int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
         // values are results directory name, immigration ratio, migration ratio, K
         Object[] phase_diag_params = new Object[]{"timeTo1Microhab_phaseDiagram_bigK_v2", 0.8, 0.8, 10000};
-        BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
+        //BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
         // TODO - Maybe do a second batch, if so NEED TO CHANGE FILE NAME IN timeToNthMicrohabPhaseDiagram
         // TODO? BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
 
 
-        // TODO - Figure 3 (the t1 phase diagram - the 4 histograms surrounding the central phase diagram
-        // TODO - ACTUALLY WAIT UNTIL THE PHASE DIAGRAM IS DONE BEFORE WE CHOOSE THE HISTOGRAMS TO SIMULATE EXTRA RUNS FOR
-        // TODO - DO THIS LATER
+        // TODO - Figure 3 (the t1 phase diagram - the 4 histograms surrounding the central phase diagram.
+        // TODO - Histograms (b-d) were not in the pseudologistic regime, so only need to redo (a) - with new params
+        // do 20 blocks on 25 cores = 500 runs at a time.
+        // should be doable on 1 week queue
+        int nBlocks = 20;
+        Object[] histogram_diag_params = new Object[]{"timeTo1Microhab_powerLaw_bigK_results_v2", 0.8, 0.8, 10000};
+        // order of array is [n_thresh, det_ratio]
+        double[] t1_big_1_v2 = new double[]{1.050, 0.750};
+        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, t1_big_1_v2);
 
 
         // Figure 4 (the blue-green-purple comparisons of stochastic and deterministic models)
@@ -39,7 +45,7 @@ public class MultispeciesMain_v2 {
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7",  nCores, nBlocks, ratios4c_rImmig_0_7);
 
-        int nBlocks = 5;
+        //int nBlocks = 5;
         // TODO - Supplementary Figure 4 (the three figures about increasing K from 1000 -> 10,000)
         // TODO - NEED TO CHANGE PARAMS IN replicateFigure4Solo AND CHANGE FILENAMES (CHECK bf_thresh_theory_plotter.ipynb)
         // K = 1000, duration = 100

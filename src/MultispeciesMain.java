@@ -13,7 +13,7 @@ public class MultispeciesMain {
         //values are results directory name, immigration ratio, migration ratio, K
         Object[] powerLaw_histogram_params = new Object[]{"timeTo1Microhab_powerLaw_bigK_results", 0.8, 0.8, 10000};
         //Do 6 parameter pairs.  2 largest values of t1, next two with biggest values of std(t1), and two random ones
-        // order of array is [n_thresh, det_ratio
+        // order of array is [n_thresh, det_ratio]
         double[] t1_big_1 = new double[]{1.35, 0.600}; //avg(t1) = 10.745, stdev(t1) = 2.865178
         double[] t1_big_2 = new double[]{1.20, 0.675}; //avg(t1) = 9.393, stdev(t1) = 2.869919
         double[] t1_stDev_big_1 = new double[]{0.825, 1.200}; //avg(t1) = 2.8975, stdev(t1) = 5.9702

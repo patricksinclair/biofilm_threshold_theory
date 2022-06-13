@@ -652,8 +652,8 @@ class BioSystem {
         double r_det_ratio_increment = (r_det_ratio_max - r_det_ratio_min)/nMeasurements;
         //ArrayList<DataBox[]> dataBoxes = new ArrayList<>();
         // todo - changed starting indices to skip over ones already done
-        for(int nt = 20; nt <= nMeasurements; nt++){
-            for(int dr = 7; dr <= nMeasurements; dr++){
+        for(int nt = 0; nt <= nMeasurements; nt++){
+            for(int dr = 0; dr <= nMeasurements; dr++){
                 double n_thresh = N_thresh_min + (nt*N_thresh_increment);
                 double det_ratio = r_det_ratio_min + (dr*r_det_ratio_increment);
 
@@ -733,7 +733,7 @@ class BioSystem {
 
         String[] headers = new String[]{"n_thresh", "det_ratio", "time_to_n", "time_elapsed"};
         String results_directory = "/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory_v2/"+params[0];
-        String filename = "t1_histogram-N_thresh="+String.format("%.3f", n_thresh)+"-r_det_ratio="+String.format("%.3f", det_ratio)+"-manyReps-session_2";
+        String filename = "t1_histogram-N_thresh="+String.format("%.3f", n_thresh)+"-r_det_ratio="+String.format("%.3f", det_ratio)+"-manyReps-v2";
 
         for(int nb = 0; nb < nBlocks; nb++){
             IntStream.range(nb, (nb+1)*nCores).parallel().forEach(i -> dataBoxes[i] = BioSystem.timeToNthMicrohabPhaseDiagram_subsubroutine(i, duration, params, n_thresh, det_ratio, microhab_lim));
