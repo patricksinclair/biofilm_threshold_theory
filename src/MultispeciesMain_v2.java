@@ -11,9 +11,9 @@ public class MultispeciesMain_v2 {
         // TODO - SET nCores TO 25 FOR THIS ONE, WE DON'T DO MULTIPLE REPS CURRENTLY
         //Time to nth microhab params
         int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
-        // values are results directory name, immigration ratio, migration ratio, K
-        Object[] phase_diag_params = new Object[]{"timeTo1Microhab_phaseDiagram_bigK_v2", 0.8, 0.8, 10000};
-        //BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
+        // values are [results directory name, immigration ratio, migration ratio, K]
+        Object[] phase_diag_params = new Object[]{"timeTo1Microhab_phaseDiagram_K_1000_v2", 0.8, 0.8, 1000};
+        BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
         // TODO - Maybe do a second batch, if so NEED TO CHANGE FILE NAME IN timeToNthMicrohabPhaseDiagram
         // TODO? BioSystem.timeToNthMicrohabPhaseDiagram(phase_diag_params, nCores, microhab_lim);
 
@@ -90,10 +90,10 @@ public class MultispeciesMain_v2 {
         // TODO - used to show (for cases where N* > K).  So to recreate the old Figure 4c, we'll change the immigration rates
         // TODO - from rImm = (0.55, 0.6, 0.65) -> rImm_v2 = (0.7, 0.75, 0.78).  The first two are already done above.
         // [threshold_N_ratio, immigration_ratio, migration_ratio, deterioration_ratio]
-        double[] ratios4c_rImmig_0_783  = new double[]{1.17, 0.783,  0.8, 0.5};
+        //double[] ratios4c_rImmig_0_783  = new double[]{1.17, 0.783,  0.8, 0.5};
 
-        int nBlocks = 5;
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_783",  nCores, nBlocks, ratios4c_rImmig_0_783);
+        //int nBlocks = 5;
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_783",  nCores, nBlocks, ratios4c_rImmig_0_783);
 
         // TODO - Also need to do the corresponding parameter set for Figure 4a (previously 4d) where N* = 0.7
         // TODO - Keep the naming convention as 4d, I know the whole scheme is a mess at this point
