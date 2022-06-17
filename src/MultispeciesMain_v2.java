@@ -35,6 +35,7 @@ public class MultispeciesMain_v2 {
         // TODO - First batch of rImms [0.65, 0.7, 0.75] (already done 0.7 for N* = 1.17)
         double[] ratios4c_rImmig_0_6  = new double[]{1.17, 0.6,  0.8, 0.5};
         double[] ratios4c_rImmig_0_65 = new double[]{1.17, 0.65, 0.8, 0.5};
+        double[] ratios4c_rImmig_0_675= new double[]{1.17, 0.675, 0.8, 0.5};
         double[] ratios4c_rImmig_0_7  = new double[]{1.17, 0.7,  0.8, 0.5};
         double[] ratios4c_rImmig_0_725= new double[]{1.17, 0.725,  0.8, 0.5};
         double[] ratios4c_rImmig_0_75 = new double[]{1.17, 0.75, 0.8, 0.5};
@@ -43,8 +44,9 @@ public class MultispeciesMain_v2 {
         int nBlocks = 5;
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_675", nCores, nBlocks, ratios4c_rImmig_0_675);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7",  nCores, nBlocks, ratios4c_rImmig_0_7);
-        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_725", nCores, nBlocks, ratios4c_rImmig_0_725);
+        //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_725", nCores, nBlocks, ratios4c_rImmig_0_725);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_75", nCores, nBlocks, ratios4c_rImmig_0_75);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_783",  nCores, nBlocks, ratios4c_rImmig_0_783);
 
