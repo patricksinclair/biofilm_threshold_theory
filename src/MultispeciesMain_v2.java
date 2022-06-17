@@ -13,7 +13,7 @@ public class MultispeciesMain_v2 {
         // TODO - phase diagram histograms
         // do 20 blocks on 25 cores = 500 runs at a time.
         // should be doable on 1 week queue
-        int nBlocks = 20;
+        //int nBlocks = 20;
         int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
         // values are [results directory name, immigration ratio, migration ratio, K]
         Object[] histogram_diag_params = new Object[]{"timeTo1Microhab_powerLaw_K_1000_results_v2", 0.8, 0.8, 1000};
@@ -38,7 +38,7 @@ public class MultispeciesMain_v2 {
         double[] ratios4c_rImmig_0_7  = new double[]{1.17, 0.7,  0.8, 0.5};
         double[] ratios4c_rImmig_0_75 = new double[]{1.17, 0.75, 0.8, 0.5};
 
-        //int nBlocks = 5;
+        int nBlocks = 5;
         BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
         BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7",  nCores, nBlocks, ratios4c_rImmig_0_7);
