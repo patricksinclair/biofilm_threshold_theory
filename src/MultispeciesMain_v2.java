@@ -23,10 +23,10 @@ public class MultispeciesMain_v2 {
         double[] r1_v2_K_1000 = new double[]{0.600, 0.3}; // random selection t1
         double[] r2_v2_K_1000 = new double[]{0.450, 1.2}; // random selection t1
 
-        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, t1_v2_K_1000);
-        // todo BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, s1_v2_K_1000);
-        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, r1_v2_K_1000);
-        // todo BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, r2_v2_K_1000);
+//        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, t1_v2_K_1000);
+//        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, s1_v2_K_1000);
+//        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, r1_v2_K_1000);
+//        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, r2_v2_K_1000);
 
 
         // TODO - Figure 4, K=1000 - MAKE SURE K = 1000 IS SET IN Biosystem.replicateFigure4Solo()
@@ -36,13 +36,13 @@ public class MultispeciesMain_v2 {
         double[] ratios4c_rImmig_0_6  = new double[]{1.17, 0.6,  0.8, 0.5};
         double[] ratios4c_rImmig_0_65 = new double[]{1.17, 0.65, 0.8, 0.5};
         double[] ratios4c_rImmig_0_7  = new double[]{1.17, 0.7,  0.8, 0.5};
-        double[] ratios4c_rImmig_0_75 = new double[]{1.17, 0.7,  0.8, 0.5};
+        double[] ratios4c_rImmig_0_75 = new double[]{1.17, 0.75, 0.8, 0.5};
 
         //int nBlocks = 5;
-        // todo BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
-        // todo BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_7",  nCores, nBlocks, ratios4c_rImmig_0_7);
-        // todo BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_75", nCores, nBlocks, ratios4c_rImmig_0_75);
+        BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_75", nCores, nBlocks, ratios4c_rImmig_0_75);
 
         // TODO - Now do the N* = 0.7 figure 4 runs with the same immigration rates that we use for the N* = 1.17 case
 
