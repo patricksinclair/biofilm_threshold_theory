@@ -481,8 +481,8 @@ class BioSystem {
         //String results_directory = "solo_results";
         // TODO - ADDED "veryLong" TO THE FILENAMES FOR THE duration = 10,000 SIMULATIONS
         String results_directory = String.format("/Disk/ds-sopa-personal/s1212500/multispecies-sims/biofilm_threshold_theory_v2/solo_results_K_%d_v2", K);
-        String pop_filename = fileID+"-stochastic_pop_over_time_v2"; //file to save all the populations over time
-        String microhab_filename = fileID+"-stochastic_microhabs_over_time_v2"; //file to save the times at which new microhabs are created
+        String pop_filename = fileID+String.format("-stochastic_pop_over_time_K_%d_v2", K); //file to save all the populations over time
+        String microhab_filename = fileID+String.format("-stochastic_microhabs_over_time_K_%d_v2", K); //file to save the times at which new microhabs are created
 
         DataBox[] dataBoxes = new DataBox[nRuns]; //array to store all the results
 
