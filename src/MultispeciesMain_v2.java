@@ -13,20 +13,22 @@ public class MultispeciesMain_v2 {
         // TODO - phase diagram histograms
         // do 20 blocks on 25 cores = 500 runs at a time.
         // should be doable on 1 week queue
-        //int nBlocks = 20;
+        int nBlocks = 20;
         int microhab_lim = 1; //this is the microhab index we're measuring the time to reach
         // values are [results directory name, immigration ratio, migration ratio, K]
         Object[] histogram_diag_params = new Object[]{"timeTo1Microhab_powerLaw_K_1000_results_v2", 0.8, 0.8, 1000};
         // order of array is [n_thresh, det_ratio]
-        double[] t1_v2_K_1000 = new double[]{1.050, 0.90}; // largest value of t1
-        double[] s1_v2_K_1000 = new double[]{0.825, 1.35}; // largest stdev of t1
+        double[] t1_v2_K_1000 = new double[]{1.275, 0.45}; // largest value of t1 (redid this because 1.050, 0.90) only had one success
+        double[] t2_v2_K_1000 = new double[]{1.050, 0.825}; // large value of time to 1st micohab (doing another set for contingencies)
+        double[] s1_v2_K_1000 = new double[]{0.750, 1.500}; // largest stdev of t1 (redid this because (0.825, 1.35) had low success rate)
+        double[] s2_v2_K_1000 = new double[]{0.900, 1.125}; // large value of stdev(t1) (doing another set for contingencies)
         double[] r1_v2_K_1000 = new double[]{0.600, 0.3}; // random selection t1
         double[] r2_v2_K_1000 = new double[]{0.450, 1.2}; // random selection t1
 
-//        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, t1_v2_K_1000);
-//        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, s1_v2_K_1000);
-//        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, r1_v2_K_1000);
-//        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, r2_v2_K_1000);
+        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, t1_v2_K_1000);
+        BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, t2_v2_K_1000);
+        //BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, s1_v2_K_1000);
+        //BioSystem.t1_powerLaw(histogram_diag_params, nCores, nBlocks, microhab_lim, s2_v2_K_1000);
 
 
         // TODO - Figure 4, K=1000 - MAKE SURE K = 1000 IS SET IN Biosystem.replicateFigure4Solo()
@@ -41,7 +43,7 @@ public class MultispeciesMain_v2 {
         double[] ratios4c_rImmig_0_75 = new double[]{1.17, 0.75, 0.8, 0.5};
         double[] ratios4c_rImmig_0_783= new double[]{1.17, 0.783,  0.8, 0.5};
 
-        int nBlocks = 5;
+//        int nBlocks = 5;
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_6",  nCores, nBlocks, ratios4c_rImmig_0_6);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_65", nCores, nBlocks, ratios4c_rImmig_0_65);
         //BioSystem.replicateFigure4Solo("ratios4c_rImmig_0_675", nCores, nBlocks, ratios4c_rImmig_0_675);
@@ -59,13 +61,13 @@ public class MultispeciesMain_v2 {
         double[] ratios4d_rImmig_0_75 = new double[]{0.7, 0.75,  0.8, 0.5};
         double[] ratios4d_rImmig_0_783= new double[]{0.7, 0.783, 0.8, 0.5};
 
-        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_6",   nCores, nBlocks, ratios4d_rImmig_0_6);
-        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_65",  nCores, nBlocks, ratios4d_rImmig_0_65);
-        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_675", nCores, nBlocks, ratios4d_rImmig_0_675);
-        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_7",   nCores, nBlocks, ratios4d_rImmig_0_7);
-        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_725", nCores, nBlocks, ratios4d_rImmig_0_725);
-        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_75",  nCores, nBlocks, ratios4d_rImmig_0_75);
-        BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_783", nCores, nBlocks, ratios4d_rImmig_0_783);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_6",   nCores, nBlocks, ratios4d_rImmig_0_6);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_65",  nCores, nBlocks, ratios4d_rImmig_0_65);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_675", nCores, nBlocks, ratios4d_rImmig_0_675);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_7",   nCores, nBlocks, ratios4d_rImmig_0_7);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_725", nCores, nBlocks, ratios4d_rImmig_0_725);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_75",  nCores, nBlocks, ratios4d_rImmig_0_75);
+        //BioSystem.replicateFigure4Solo("ratios4d_rImmig_0_783", nCores, nBlocks, ratios4d_rImmig_0_783);
 
 
 
